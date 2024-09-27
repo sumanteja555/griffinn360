@@ -1,0 +1,94 @@
+/* parent container styles */
+.container {
+  width: 100%;
+  gap: 1rem;
+  padding: 0 5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 3rem;
+}
+.itemContainer {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  transform: scale(1);
+  transition: transform 0.3s ease-out;
+}
+.itemContainer:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease-in;
+}
+
+.container:hover .itemContainer:not(:hover) {
+  transform: scale(0.9);
+  transition: all 0.3s ease-out;
+}
+
+.imgContainer {
+  width: 100%;
+  aspect-ratio: 1/1;
+  padding: 0;
+  margin: 0;
+}
+.itemImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.itemContent {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.itemTitle {
+  font-size: larger;
+  text-transform: uppercase;
+  letter-spacing: 0.2ch;
+  font-weight: bold;
+  word-break: break-all;
+  text-align: center;
+}
+
+.itemLink {
+  background: #5e5df0;
+  border-radius: 999px;
+  /* box-shadow: #5e5df0 0 10px 20px -10px; */
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji",
+    NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji",
+    EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+  text-decoration: none;
+}
+
+/* media queries */
+
+@media screen and (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "require": {
+        "firebase/php-jwt": "*",
+<<<<<<< HEAD
+<<<<<<< HEAD
+        "razorpay/razorpay": "^2.9"
+=======
+        "razorpay/razorpay": "^2.9",
+        "rmccue/requests": "2.0.12"
+>>>>>>> master
+=======
+        "razorpay/razorpay": "^2.9"
+>>>>>>> origin/main
+    }
+}

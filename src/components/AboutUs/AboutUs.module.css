@@ -1,0 +1,98 @@
+/* General container styles */
+.container {
+  min-height: 100dvh;
+  max-width: 80vw;
+  margin: 0 auto;
+  padding: 1rem; /* Added padding for better spacing */
+}
+
+/* About info styles */
+#infoContainer {
+  border-radius: 25px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1.5rem;
+}
+.info {
+  margin-bottom: 1rem;
+  text-align: justify;
+  line-height: 2;
+}
+.infoTitle {
+  font-size: clamp(1.2rem, 1.5rem, 2rem);
+  font-weight: bold;
+  color: var(--secondaryColor);
+}
+.infoDescription {
+  font-size: large;
+  color: white;
+  letter-spacing: 0.1ch;
+}
+
+/* Mission & Vision styles */
+.mvContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.heading {
+  font-size: clamp(1rem, 2rem, 3rem);
+  text-align: center;
+  color: black;
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-underline-offset: 0.3em;
+}
+.mvText {
+  text-align: justify;
+  font-size: large;
+  line-height: 1.7rem;
+}
+
+/* Team styles */
+.teamBody {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.teamImg {
+  grid-column: 1/2;
+  width: 100%;
+  height: auto; /* Changed from 100% to auto to maintain aspect ratio */
+  object-fit: contain;
+}
+.teamInfoDiv {
+  grid-column: 2/6;
+}
+
+/* Founder Info styles */
+.founderInfoHeading {
+  font-size: clamp(1rem, 1.5rem, 2.5rem);
+  color: #168a9c;
+  font-weight: 600;
+}
+.founderInfoText {
+  text-align: justify;
+  font-size: large;
+  line-height: 1.5rem;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .mvContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .teamBody {
+    grid-template-columns: 1fr;
+  }
+  .teamImg {
+    grid-column: 1;
+  }
+  .teamInfoDiv {
+    grid-column: 1;
+  }
+}

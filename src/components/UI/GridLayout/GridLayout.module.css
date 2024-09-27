@@ -1,0 +1,178 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 5rem 0;
+}
+#heading {
+  text-align: center;
+  letter-spacing: 0.2ch;
+  font-size: xx-large;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+  text-decoration-color: var(--secondaryColor);
+  text-transform: uppercase;
+}
+.gridItemsContainer {
+  width: 80%;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.itemContainer {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 25px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.imgContainer {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  flex: 6;
+}
+.img {
+  max-width: 100%;
+  aspect-ratio: 12/9;
+  object-fit: cover;
+}
+
+.infoContainer {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem 1rem 1rem;
+  text-align: center;
+}
+.title {
+  flex: 2;
+  font-size: larger;
+  font-weight: bold;
+  letter-spacing: 0.3ch;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* event description styles */
+.description {
+  flex: 2;
+  text-align: justify;
+}
+
+/* event price styles */
+.price {
+  flex: 2;
+  font-weight: bold;
+}
+
+/* book now button styles */
+
+.btn {
+  flex: 2;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #1a1a1a;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3b3b3b;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+.btn:hover {
+  color: #fff;
+  background-color: #1a1a1a;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+/* more infor button styles */
+.moreInfo {
+  color: var(--secondaryColor);
+  position: relative;
+  text-decoration: none;
+  font-size: larger;
+  text-transform: capitalize;
+  transition: all 0.2s ease-out;
+}
+
+.moreInfo::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+  height: 4px;
+  border-radius: 4px;
+  background-color: var(--secondaryColor);
+  bottom: 0;
+  left: 0;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+/* hover styles */
+.moreInfo:hover {
+  color: black;
+  padding-bottom: 0.5rem;
+  transition: all 0.2s ease-in;
+}
+.moreInfo:hover::before {
+  transform-origin: left;
+  transform: scaleX(0.5);
+  left: 25%;
+  transition: all 0.2s ease-in;
+}
+
+@media screen and (max-width: 768px) {
+  .gridItemsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .gridItemsContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* only for adventure park */
+.parkInfo {
+  width: 80%;
+  margin: 2rem auto;
+  text-align: justify;
+  letter-spacing: 0.1ch;
+  line-height: 2;
+}
