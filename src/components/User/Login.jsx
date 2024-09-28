@@ -2,8 +2,8 @@ import axios from "axios";
 import styles from "./User.module.css";
 import Input, { PasswordInput } from "./Input";
 
-import { useState } from "react";
-import { useDispatch } from "react-redux"; // Import useDispatch and useSelector
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux"; // Import useDispatch and useSelector
 import { useLocation, useNavigate } from "react-router-dom";
 import { userActions, snackbarActions } from "../../store/store";
 
@@ -27,11 +27,17 @@ const Login = ({
     password: "",
   });
 
-  const dispatch = useDispatch(); // Initialize dispatch
-  const location = useLocation(); // Hook to get the current location object
-  const navigate = useNavigate(); // Hook to programmatically navigate
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const from = location.state.from.pathname || "/";
 
-  const redirectTo = location.state?.from || "/"; // Fallback to home page if no "from" location exists
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(from, { replace: true });
+    }
+  }, [isLoggedIn, navigate, from]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -63,8 +69,7 @@ const Login = ({
             message: "logged in Successfully",
           })
         );
-
-        navigate(redirectTo);
+        navigate(from, { replace: true });
       }
     } catch (error) {
       // console.error(
@@ -100,7 +105,11 @@ const Login = ({
 
           <p className={styles.toggleContainer}>
             Already have an account? Click Here to
-            <button className={styles.toggleBtn} onClick={handleToggle}>
+            <button
+              type="button"
+              className={styles.toggleBtn}
+              onClick={handleToggle}
+            >
               Signup
             </button>
           </p>

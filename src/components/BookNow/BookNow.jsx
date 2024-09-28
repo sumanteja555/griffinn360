@@ -12,8 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { snackbarActions } from "../../store/store";
 
 export default function BookNow() {
-  const eventName = useSelector((state) => state.eventName);
-  const price = useSelector((state) => state.price);
+  const eventName = useSelector((state) => state.cart.eventName);
+  const price = useSelector((state) => state.cart.price);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
