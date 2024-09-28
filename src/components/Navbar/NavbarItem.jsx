@@ -10,28 +10,18 @@ import logo from "../../assets/logo.webp";
 import styles from "./NavbarItem.module.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../../store/store";
->>>>>>> master
-=======
->>>>>>> origin/main
 
 function NavbarItem() {
   const [expanded, setExpanded] = useState(false);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  const isLoggedIn = useSelector((state)=>state.user.isLoggedIn);
-  const userName = useSelector((state)=>state.user.name);
+
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const userName = useSelector((state) => state.user.name);
   const dispatch = useDispatch();
 
->>>>>>> master
-=======
->>>>>>> origin/main
   const handleToggle = () => {
     setExpanded(!expanded);
   };
@@ -39,17 +29,11 @@ function NavbarItem() {
   const handleSelect = () => {
     setExpanded(false);
   };
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
-  function handleLogout(){
+  function handleLogout() {
     handleSelect();
     dispatch(userActions.clearUser())
   }
->>>>>>> master
-=======
->>>>>>> origin/main
   return (
     <Navbar
       collapseOnSelect
@@ -150,9 +134,7 @@ function NavbarItem() {
             >
               Volunteer
             </NavLink>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 
             {isLoggedIn ? (<NavDropdown title={userName} id="basic-nav-dropdown">
               <NavDropdown.Item>
@@ -173,22 +155,18 @@ function NavbarItem() {
                   Logout
                 </NavLink>
               </NavDropdown.Item>
-            </NavDropdown>):(
+            </NavDropdown>) : (
               <NavLink
-              className="nav-link"
-              role="button"
-              tabIndex="0"
-              to="/user"
-              onClick={handleSelect}
-            >
-              Login
-            </NavLink>
+                className="nav-link"
+                role="button"
+                tabIndex="0"
+                to="/user"
+                onClick={handleSelect}
+              >
+                Login
+              </NavLink>
             )}
 
-            
->>>>>>> master
-=======
->>>>>>> origin/main
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -25,13 +25,11 @@ const PaymentSuccessPage = lazy(() =>
   import("./components/PaymentSuccess/PaymentSuccess.jsx")
 );
 const User = lazy(() => import("./components/User/User.jsx"));
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-const Bookings = lazy(()=> import('./components/Bookings/Bookings.jsx'))
->>>>>>> master
-=======
->>>>>>> origin/main
+
+const Bookings = lazy(() => import('./components/Bookings/Bookings.jsx'))
+
+import PrivateRoute from "./pages/PrivateRoute.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -131,9 +129,11 @@ const router = createBrowserRouter([
       {
         path: "/booknow",
         element: (
-          <Suspense>
-            <BooknowPage />
-          </Suspense>
+          <PrivateRoute>
+            <Suspense fallback={<div>Loading...</div>}>
+              <BooknowPage />
+            </Suspense>
+          </PrivateRoute>
         ),
       },
       {
@@ -168,20 +168,17 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
       {
         path: "/bookings",
         element: (
-          <Suspense>
-            <Bookings />
-          </Suspense>
+          <PrivateRoute>
+            <Suspense>
+              <Bookings />
+            </Suspense>
+          </PrivateRoute>
         ),
       },
->>>>>>> master
-=======
->>>>>>> origin/main
     ],
   },
 ]);

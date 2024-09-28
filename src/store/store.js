@@ -1,11 +1,5 @@
 import { configureStore, createSlice, combineReducers } from "@reduxjs/toolkit";
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import { jwtDecode } from "jwt-decode"; // Ensure jwtDecode is imported correctly
->>>>>>> master
-=======
->>>>>>> origin/main
 import {
   persistStore,
   persistReducer,
@@ -40,11 +34,7 @@ const cartSlice = createSlice({
   },
 });
 
-// Initial state for user slice
-<<<<<<< HEAD
-<<<<<<< HEAD
-const initialUserState = { isAuthenticated: false };
-=======
+
 const initialUserState = { isLoggedIn: false, token: null, name: null, number: null };
 
 // Function to check token expiration
@@ -57,10 +47,7 @@ const isTokenExpired = (token) => {
     return true; // If any error occurs during decoding, treat token as expired
   }
 };
->>>>>>> master
-=======
-const initialUserState = { isAuthenticated: false };
->>>>>>> origin/main
+
 
 // User slice
 const userSlice = createSlice({
@@ -68,18 +55,6 @@ const userSlice = createSlice({
   initialState: initialUserState,
   reducers: {
     setUser(state, action) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/main
-      state.isAuthenticated = action.payload.name;
-      state.email = action.payload.email;
-    },
-    clearUser(state) {
-      state.name = "";
-      state.email = "";
-<<<<<<< HEAD
-=======
       const token = action.payload.token;
       
       if (isTokenExpired(token)) {
@@ -105,9 +80,7 @@ const userSlice = createSlice({
       state.token = null;
       state.name = null;
       state.number = null;
->>>>>>> master
-=======
->>>>>>> origin/main
+
     },
   },
 });

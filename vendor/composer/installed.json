@@ -32,15 +32,7 @@
             },
             "time": "2024-05-18T18:05:11+00:00",
             "type": "library",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "installation-source": "source",
-=======
             "installation-source": "dist",
->>>>>>> master
-=======
-            "installation-source": "source",
->>>>>>> origin/main
             "autoload": {
                 "psr-4": {
                     "Firebase\\JWT\\": "src"
@@ -100,15 +92,7 @@
             },
             "time": "2023-12-18T04:19:46+00:00",
             "type": "library",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "installation-source": "source",
-=======
             "installation-source": "dist",
->>>>>>> master
-=======
-            "installation-source": "source",
->>>>>>> origin/main
             "autoload": {
                 "files": [
                     "Deprecated.php"
@@ -188,15 +172,7 @@
             },
             "time": "2024-07-08T08:10:42+00:00",
             "type": "library",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "installation-source": "source",
-=======
             "installation-source": "dist",
->>>>>>> master
-=======
-            "installation-source": "source",
->>>>>>> origin/main
             "autoload": {
                 "files": [
                     "library/Deprecated.php"

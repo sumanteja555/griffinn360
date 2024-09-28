@@ -4,15 +4,7 @@
 
 namespace Composer\Autoload;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-class ComposerStaticInitc03f4a4f5ecea74473fbe486d28b7b25
-=======
-class ComposerStaticInit1d91fcea4a15892b8cc3d31db70508c8
->>>>>>> master
-=======
-class ComposerStaticInitc03f4a4f5ecea74473fbe486d28b7b25
->>>>>>> origin/main
+class ComposerStaticInit071dbaf472d7485d83e0bd9411641439
 {
     public static $files = array (
         '941748b3c8cae4466c827dfb5ca9602a' => __DIR__ . '/..' . '/rmccue/requests/library/Deprecated.php',
@@ -62,21 +54,9 @@ class ComposerStaticInitc03f4a4f5ecea74473fbe486d28b7b25
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc03f4a4f5ecea74473fbe486d28b7b25::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc03f4a4f5ecea74473fbe486d28b7b25::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc03f4a4f5ecea74473fbe486d28b7b25::$classMap;
-=======
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1d91fcea4a15892b8cc3d31db70508c8::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1d91fcea4a15892b8cc3d31db70508c8::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit1d91fcea4a15892b8cc3d31db70508c8::$classMap;
->>>>>>> master
-=======
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc03f4a4f5ecea74473fbe486d28b7b25::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc03f4a4f5ecea74473fbe486d28b7b25::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc03f4a4f5ecea74473fbe486d28b7b25::$classMap;
->>>>>>> origin/main
+            $loader->prefixLengthsPsr4 = ComposerStaticInit071dbaf472d7485d83e0bd9411641439::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit071dbaf472d7485d83e0bd9411641439::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit071dbaf472d7485d83e0bd9411641439::$classMap;
 
         }, null, ClassLoader::class);
     }

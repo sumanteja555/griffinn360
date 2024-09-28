@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $number = $data['email'];
     $password = $data['password'];
 
-
     $errorMessage = '';
 
     if ($number == '' || $password == '') {
@@ -33,15 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($errorMessage != '') {
         $response = [
             'success' => false,
-<<<<<<< HEAD
-<<<<<<< HEAD
-            'message' => $data,
-=======
             'message' => $errorMessage,
->>>>>>> master
-=======
-            'message' => $data,
->>>>>>> origin/main
         ];
 
         http_response_code(200);
@@ -60,29 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Connection failed: " . $conn->connect_error);
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        $stmt = $conn->prepare("SELECT password FROM users WHERE number = ?");
-=======
         $stmt = $conn->prepare("SELECT name, password FROM users WHERE number = ?");
->>>>>>> master
-=======
-        $stmt = $conn->prepare("SELECT password FROM users WHERE number = ?");
->>>>>>> origin/main
         $stmt->bind_param("s", $number);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            $stmt->bind_result($hashedPassword);
-=======
             $stmt->bind_result($name, $hashedPassword);
->>>>>>> master
-=======
-            $stmt->bind_result($hashedPassword);
->>>>>>> origin/main
             $stmt->fetch();
 
             // Verify the password
@@ -90,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // generation of jwt token
                 $issuedAt = time();
-                $expirationTime = $issuedAt + 404800;
+                $expirationTime = $issuedAt + 3600;
 
                 $payload = [
                     "iss" => "http://localhost",  // Issuer
@@ -108,13 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'success' => true,
                     'message' => "logged in successfully",
                     'token' => $jwt,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                     'username'=>$name
->>>>>>> master
-=======
->>>>>>> origin/main
+
                 ];
                 http_response_code(200);
 

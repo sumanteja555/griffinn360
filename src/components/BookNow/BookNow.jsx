@@ -10,19 +10,9 @@ import logo from "../../assets/logo.webp";
 import { useNavigate } from "react-router-dom";
 
 export default function BookNow() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  const eventName = useSelector((state) => state.eventName);
-  const price = useSelector((state) => state.price);
-=======
-  const eventName = useSelector((state) => state.cart.eventName);
-  const price = useSelector((state) => state.cart.price);
->>>>>>> master
-=======
-  const eventName = useSelector((state) => state.eventName);
-  const price = useSelector((state) => state.price);
->>>>>>> origin/main
 
+  const eventName = useSelector((state) => state.eventName);
+  const price = useSelector((state) => state.price);
   const navigate = useNavigate();
 
   const [amount, setAmount] = useState(price);

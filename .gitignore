@@ -1,6 +1,7 @@
 node_modules
 config.php
 vendor
+vendor/
 
 # Ignore node_modules folder
 node_modules/
@@ -11,6 +12,7 @@ node_modules/
 # Ignore build outputs
 /dist
 /build
+dist
 
 # Ignore environment files
 .env

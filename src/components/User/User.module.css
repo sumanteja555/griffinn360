@@ -1,14 +1,6 @@
 .userContainer {
   width: 100%;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  height: 100%;
-=======
   min-height: 100%;
->>>>>>> master
-=======
-  height: 100%;
->>>>>>> origin/main
   background: url("../../assets/userbg.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -16,35 +8,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
   padding: 3rem 0;
->>>>>>> master
-=======
->>>>>>> origin/main
 }
 
 .formContainer {
   padding: 2rem 0;
-  backdrop-filter: blur(5px) saturate(180%);
-  -webkit-backdrop-filter: blur(22px) saturate(30%);
-  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(3px) saturate(180%);
+  -webkit-backdrop-filter: blur(3px) saturate(30%);
+  background-color: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.125);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: r;
+  /* background-color: r; */
   border-radius: 25px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+  box-shadow: rgba(50, 50, 93, 0.5) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
-.formContainer > h1 {
+.formContainer>h1 {
   text-transform: uppercase;
   letter-spacing: 0.2ch;
 }
+
 .form {
   min-height: 50vh;
   width: 50vw;
@@ -64,7 +52,7 @@
   gap: 0.3rem;
 }
 
-.inputContainer > input {
+.inputContainer>input {
   background: transparent;
   padding: 0.5rem 0;
   border: none;
@@ -76,8 +64,8 @@
 }
 
 /* Change the underline color on focus */
-.inputContainer > input:focus,
-.inputContainer > input:hover {
+.inputContainer>input:focus,
+.inputContainer>input:hover {
   border-bottom: 3px solid rgb(2, 65, 123);
 
   &::placeholder {
@@ -85,19 +73,19 @@
   }
 }
 
-.inputContainer > input:user-invalid {
+.inputContainer>input:user-invalid {
   border-bottom: 2px solid red;
 }
 
 /* removing arrows for number inputs */
-.inputContainer > input::-webkit-outer-spin-button,
-.inputContainer > input::-webkit-inner-spin-button {
+.inputContainer>input::-webkit-outer-spin-button,
+.inputContainer>input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Firefox */
-.inputContainer > input[type="number"] {
+.inputContainer>input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
@@ -108,7 +96,8 @@
   width: 70%;
   position: relative !important;
 }
-.passwordWrapper > input {
+
+.passwordWrapper>input {
   background-color: transparent;
   border: none;
   outline: none;
@@ -116,14 +105,15 @@
 }
 
 /* Change the underline color on focus */
-.passwordWrapper > input:focus,
-.passwordWrapper > input:hover {
+.passwordWrapper>input:focus,
+.passwordWrapper>input:hover {
   border-bottom: 3px solid rgb(2, 65, 123);
 
   &::placeholder {
     color: rgba(0, 0, 0, 0.5);
   }
 }
+
 .eyeIcon {
   max-width: 1.3rem;
   cursor: pointer;
@@ -131,11 +121,13 @@
   position: relative;
   bottom: 1.4rem;
 }
+
 /* toggle btn styles */
 
 .toggleContainer {
   text-align: center;
 }
+
 .toggleBtn {
   border: none;
   outline: none;
@@ -147,6 +139,7 @@
 .toggleBtn:hover {
   color: blue;
 }
+
 .userBtn {
   align-items: center;
   background-color: #fff;
@@ -190,6 +183,7 @@
     width: 100%;
     padding: 0 1rem;
   }
+
   .inputContainer,
   .passwordWrapper {
     width: 90%;
