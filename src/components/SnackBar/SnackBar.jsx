@@ -34,6 +34,7 @@ export default function SnackBar() {
         onClose={handleClose}
         TransitionComponent={Fade}
         key={vertical + horizontal}
+        style={{ top: "6rem" }}
       >
         <Alert
           onClose={handleClose}

@@ -3,17 +3,20 @@ import { useState, useEffect } from "react";
 import styles from "./BookNow.module.css";
 
 // redux imports
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Input from "./Input";
 
 import logo from "../../assets/logo.webp";
 import { useNavigate } from "react-router-dom";
 
-export default function BookNow() {
+import { snackbarActions } from "../../store/store";
 
+export default function BookNow() {
   const eventName = useSelector((state) => state.eventName);
   const price = useSelector((state) => state.price);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const [amount, setAmount] = useState(price);
   const [minDate, setMinDate] = useState("");
@@ -47,10 +50,9 @@ export default function BookNow() {
         }
       );
       const data = await response.json();
-
       return data;
     } catch (error) {
-      console.error("Error creating order:", error);
+      // console.error("Error creating order:", error);
     }
   }
 
@@ -152,13 +154,31 @@ export default function BookNow() {
 
             if (data.status === "success") {
               await hanldeBooking(bookingData);
-              navigate("/paymentsuccess");
+              dispatch(
+                snackbarActions.openBar({
+                  type: "success",
+                  message: "Payment Successful",
+                })
+              );
+              navigate("/");
             } else {
-              alert("Payment verification failed.");
+              // alert("Payment verification failed.");
+              dispatch(
+                snackbarActions.openBar({
+                  type: "warning",
+                  message: "Payment failed. Please try again",
+                })
+              );
             }
           } catch (error) {
             // console.error("Error verifying payment:", error);
-            alert("An error occurred while verifying the payment.");
+            // alert("An error occurred while verifying the payment.");
+            dispatch(
+              snackbarActions.openBar({
+                type: "warning",
+                message: "Payment failed. Please try again",
+              })
+            );
           }
         },
         prefill: {
@@ -186,7 +206,7 @@ export default function BookNow() {
         window.removeEventListener("resize", adjustRazorpayModal);
       });
     } catch (error) {
-      alert("An error occurred. Please try again later.");
+      // alert("An error occurred. Please try again later.");
     }
   };
 

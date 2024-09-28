@@ -67,10 +67,10 @@ const Login = ({
         navigate(redirectTo);
       }
     } catch (error) {
-      console.error(
-        "There was an error logging in:",
-        error.response.data.message
-      );
+      // console.error(
+      //   "There was an error logging in:",
+      //   error.response.data.message
+      // );
 
       dispatch(
         snackbarActions.openBar({
