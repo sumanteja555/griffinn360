@@ -26,7 +26,7 @@ const PaymentSuccessPage = lazy(() =>
 );
 const User = lazy(() => import("./components/User/User.jsx"));
 
-const Bookings = lazy(() => import('./components/Bookings/Bookings.jsx'))
+const Bookings = lazy(() => import("./components/Bookings/Bookings.jsx"));
 
 import PrivateRoute from "./pages/PrivateRoute.jsx";
 

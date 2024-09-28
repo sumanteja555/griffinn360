@@ -4,6 +4,9 @@ import Input, { PasswordInput } from "./Input";
 
 import { useState } from "react";
 
+import { useDispatch } from "react-redux";
+import { snackbarActions } from "../../store/store";
+
 const signupDetails = [
   {
     id: "name",
@@ -39,13 +42,14 @@ const Signup = ({
     password: "",
   });
 
+  const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission
-    console.log(formData);
 
     // Sending form data to PHP backend
     try {
@@ -53,11 +57,24 @@ const Signup = ({
         "http://localhost/griffinn360adventures/backend/signup.php",
         formData
       );
-      console.log("Form submitted successfully:", response.data);
+
+      dispatch(
+        snackbarActions.openBar({
+          type: "success",
+          message: "Signup Successfull",
+        })
+      );
+      handleToggle();
     } catch (error) {
-      console.error(
-        "There was an error submitting the form:",
-        error.response.data.message
+      // console.error(
+      //   "There was an error submitting the form:",
+      //   error.response.data.message
+      // );
+      dispatch(
+        snackbarActions.openBar({
+          type: "warning",
+          message: error.response.data.message,
+        })
       );
     }
   };

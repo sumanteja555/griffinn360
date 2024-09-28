@@ -5,7 +5,7 @@ import Input, { PasswordInput } from "./Input";
 import { useState } from "react";
 import { useDispatch } from "react-redux"; // Import useDispatch and useSelector
 import { useLocation, useNavigate } from "react-router-dom";
-import { userActions } from "../../store/store";
+import { userActions, snackbarActions } from "../../store/store";
 
 const loginDetails = [
   {
@@ -31,7 +31,6 @@ const Login = ({
   const location = useLocation(); // Hook to get the current location object
   const navigate = useNavigate(); // Hook to programmatically navigate
 
-
   const redirectTo = location.state?.from || "/"; // Fallback to home page if no "from" location exists
 
   const handleChange = (e) => {
@@ -40,13 +39,13 @@ const Login = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    
+
     try {
       const response = await axios.post(
         "http://localhost/griffinn360adventures/backend/login.php",
         formData
       );
-      
+
       if (response.data.success) {
         const token = response.data.token;
 
@@ -58,16 +57,28 @@ const Login = ({
           })
         );
 
+        dispatch(
+          snackbarActions.openBar({
+            type: "success",
+            message: "logged in Successfully",
+          })
+        );
+
         navigate(redirectTo);
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error(
         "There was an error logging in:",
         error.response.data.message
       );
-    }
 
+      dispatch(
+        snackbarActions.openBar({
+          type: "error",
+          message: error.response.data.message,
+        })
+      );
+    }
 
     // Sending login data to PHP backend
   };
@@ -98,6 +109,6 @@ const Login = ({
       </div>
     </div>
   );
-}
+};
 
 export default Login;

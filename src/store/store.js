@@ -34,8 +34,12 @@ const cartSlice = createSlice({
   },
 });
 
-
-const initialUserState = { isLoggedIn: false, token: null, name: null, number: null };
+const initialUserState = {
+  isLoggedIn: false,
+  token: null,
+  name: null,
+  number: null,
+};
 
 // Function to check token expiration
 const isTokenExpired = (token) => {
@@ -48,7 +52,6 @@ const isTokenExpired = (token) => {
   }
 };
 
-
 // User slice
 const userSlice = createSlice({
   name: "user",
@@ -56,7 +59,7 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, action) {
       const token = action.payload.token;
-      
+
       if (isTokenExpired(token)) {
         // If token is expired, reset user state to initial values
         state.isLoggedIn = false;
@@ -70,9 +73,6 @@ const userSlice = createSlice({
         state.token = token;
         state.name = action.payload.name;
         state.number = decodedToken.data?.number;
-
-        console.log(state);
-        
       }
     },
     clearUser(state) {
@@ -80,7 +80,23 @@ const userSlice = createSlice({
       state.token = null;
       state.name = null;
       state.number = null;
+    },
+  },
+});
 
+const initialSnackbarState = { isOpen: false, type: null, message: null };
+
+const snackbarSlice = createSlice({
+  name: "snackbar",
+  initialState: initialSnackbarState,
+  reducers: {
+    openBar(state, action) {
+      state.isOpen = true;
+      state.type = action.payload.type;
+      state.message = action.payload.message;
+    },
+    closeBar(state) {
+      state.isOpen = false;
     },
   },
 });
@@ -89,6 +105,7 @@ const userSlice = createSlice({
 const rootReducer = combineReducers({
   cart: cartSlice.reducer,
   user: userSlice.reducer,
+  snackbar: snackbarSlice.reducer,
 });
 
 // Apply persistReducer to the root reducer
@@ -108,5 +125,6 @@ const store = configureStore({
 // Export actions and store
 export const cartActions = cartSlice.actions;
 export const userActions = userSlice.actions; // Export user actions
+export const snackbarActions = snackbarSlice.actions;
 export const persistor = persistStore(store);
 export default store;

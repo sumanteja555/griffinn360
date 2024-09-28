@@ -12,11 +12,10 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { userActions } from "../../store/store";
+import { userActions, snackbarActions } from "../../store/store";
 
 function NavbarItem() {
   const [expanded, setExpanded] = useState(false);
-
 
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const userName = useSelector((state) => state.user.name);
@@ -32,7 +31,13 @@ function NavbarItem() {
 
   function handleLogout() {
     handleSelect();
-    dispatch(userActions.clearUser())
+    dispatch(userActions.clearUser());
+    dispatch(
+      snackbarActions.openBar({
+        type: "info",
+        message: "Signout Successful",
+      })
+    );
   }
   return (
     <Navbar
@@ -135,27 +140,28 @@ function NavbarItem() {
               Volunteer
             </NavLink>
 
-
-            {isLoggedIn ? (<NavDropdown title={userName} id="basic-nav-dropdown">
-              <NavDropdown.Item>
-                <NavLink
-                  to="/bookings"
-                  className="dropdown-item"
-                  onClick={handleSelect}
-                >
-                  Bookings
-                </NavLink>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <NavLink
-                  to="/"
-                  className="dropdown-item"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </NavLink>
-              </NavDropdown.Item>
-            </NavDropdown>) : (
+            {isLoggedIn ? (
+              <NavDropdown title={userName} id="basic-nav-dropdown">
+                <NavDropdown.Item>
+                  <NavLink
+                    to="/bookings"
+                    className="dropdown-item"
+                    onClick={handleSelect}
+                  >
+                    Bookings
+                  </NavLink>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <NavLink
+                    to="/"
+                    className="dropdown-item"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </NavLink>
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : (
               <NavLink
                 className="nav-link"
                 role="button"
@@ -166,7 +172,6 @@ function NavbarItem() {
                 Login
               </NavLink>
             )}
-
           </Nav>
         </Navbar.Collapse>
       </Container>
