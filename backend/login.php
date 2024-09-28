@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'message' => $errorMessage,
         ];
 
-        http_response_code(200);
+        http_response_code(400);
 
         // Set the response header to application/json
         header('Content-Type: application/json');
@@ -68,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $expirationTime = $issuedAt + 3600;
 
                 $payload = [
-                    "iss" => "http://localhost",  // Issuer
-                    "aud" => "http://localhost",  // Audience
+                    "iss" => "https://griffinn360adventures.com/",  // Issuer
+                    "aud" => "https://griffinn360adventures.com/",  // Audience
                     "iat" => $issuedAt,           // Issued at
                     "exp" => $expirationTime,     // Expiration time
                     "data" => [
@@ -87,10 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 ];
                 http_response_code(200);
-
                 // Set the response header to application/json
                 header('Content-Type: application/json');
-
                 // Return a JSON response
                 echo json_encode($response);
                 exit; // Ensure no further output is sent

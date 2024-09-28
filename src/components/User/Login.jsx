@@ -40,14 +40,12 @@ const Login = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    console.log(formData);
     
     try {
       const response = await axios.post(
         "http://localhost/griffinn360adventures/backend/login.php",
         formData
       );
-      console.log(response);
       
       if (response.data.success) {
         const token = response.data.token;
