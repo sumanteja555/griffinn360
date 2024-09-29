@@ -26,10 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 // Process request
 $data = json_decode(file_get_contents('php://input'), true);
-// if (empty($data)) {
-//     echo json_encode(['error' => 'No data received']);
-//     exit();
-// }
 
 $amountWithOutTax = $data['amount'];
 $tax = $amountWithOutTax * 0.03;
@@ -38,7 +34,7 @@ $taxAmount = $amountWithOutTax + $tax;
 // Order details
 $amount = $taxAmount* 100; // Convert to paise
 $currency = 'INR';
-$receipt = 'order_rcptid_11'; // Unique receipt ID
+$receipt = 'gi360a'; // Unique receipt ID
 
 // Create an order
 $orderData = [

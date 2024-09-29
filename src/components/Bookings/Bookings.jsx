@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+import styles from "./Bookings.module.css";
+
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const userNumber = useSelector((state) => state.user.number); // Assuming user is stored in Redux
@@ -24,11 +26,10 @@ const Bookings = () => {
         }
 
         const data = await response.json();
-        console.log(data);
 
         setBookings(data);
       } catch (error) {
-        console.error("Error fetching bookings:", error);
+        // console.error("Error fetching bookings:", error);
       }
     };
 
@@ -38,22 +39,68 @@ const Bookings = () => {
   }, [userNumber]);
 
   return (
-    <div>
-      <h2>My Bookings</h2>
-      {bookings.length > 0 ? (
-        <ul>
-          {bookings.map((booking) => (
-            <li key={booking.id}>
-              <p>Package: {booking.event_name}</p>
-              <p>Date: {booking.travel_date}</p>
-              <p>Status: {booking.status}</p>
-            </li>
-          ))}
-        </ul>
+    <section className={styles.container}>
+      <h2 className={styles.heading}>My Bookings</h2>
+
+      {bookings ? (
+        bookings.map(
+          ({
+            event_name,
+            amount,
+            travel_date,
+            persons,
+            name,
+            email,
+            order_id,
+          }) => {
+            const date = new Date(travel_date).toLocaleDateString("en-GB");
+            return (
+              <div className={styles.bookingContainer} key={order_id}>
+                <div className={styles.orderidContainer}>
+                  <p className={styles.subTitle}>Order Id</p>
+                  <p>{order_id}</p>
+                </div>
+                {/* event name */}
+                <div className={styles.infoContainer}>
+                  <p className={styles.subTitle}>Event Name</p>
+                  <p>{event_name}</p>
+                </div>
+                {/* amount */}
+                <div className={styles.infoContainer}>
+                  <p className={styles.subTitle}>Price</p>
+                  <p>Rs: {amount} /-</p>
+                </div>
+
+                {/* date */}
+                <div className={styles.infoContainer}>
+                  <p className={styles.subTitle}>Activity Date</p>
+                  <p>{date}</p>
+                </div>
+
+                {/* userName */}
+                <div className={styles.infoContainer}>
+                  <p className={styles.subTitle}>Booking Name</p>
+                  <p>{name}</p>
+                </div>
+
+                {/* booking email */}
+                <div className={styles.infoContainer}>
+                  <p className={styles.subTitle}>Booking Email</p>
+                  <p>{email}</p>
+                </div>
+
+                <div className={styles.infoContainer}>
+                  <p className={styles.subTitle}>No. of Persons</p>
+                  <p>{persons}</p>
+                </div>
+              </div>
+            );
+          }
+        )
       ) : (
-        <p>No bookings found</p>
+        <h3 className={styles.text}>No Bookings found for this user</h3>
       )}
-    </div>
+    </section>
   );
 };
 
