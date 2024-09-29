@@ -31,7 +31,7 @@ const Login = ({
   const location = useLocation();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const from = location.state.from.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     if (isLoggedIn) {

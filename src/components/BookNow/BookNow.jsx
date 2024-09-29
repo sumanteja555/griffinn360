@@ -14,6 +14,7 @@ import { snackbarActions } from "../../store/store";
 export default function BookNow() {
   const eventName = useSelector((state) => state.cart.eventName);
   const price = useSelector((state) => state.cart.price);
+  const userNumber = useSelector((state) => state.user.number);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -62,7 +63,7 @@ export default function BookNow() {
     if (modal) {
       let styles = {
         position: "absolute",
-        top: "30%",
+        top: "20%",
         left: "50%",
         transform: "translate(-50%, -50%)",
         maxHeight: "90vh",
@@ -102,7 +103,6 @@ export default function BookNow() {
           body: JSON.stringify(bookingData),
         }
       );
-
       const data = response.json();
     } catch (error) {}
   };
@@ -142,7 +142,7 @@ export default function BookNow() {
 
             const bookingData = {
               name: formData.name,
-              mobileNumber: formData.mobileNumber,
+              mobileNumber: userNumber,
               email: formData.email,
               persons: formData.persons,
               travelDate: formData.date,
@@ -184,7 +184,7 @@ export default function BookNow() {
         prefill: {
           name: formData.name,
           email: formData.email,
-          contact: formData.mobileNumber,
+          contact: userNumber,
         },
         theme: {
           color: "#3399cc",
@@ -222,15 +222,6 @@ export default function BookNow() {
           placeholder="Enter your full name"
           labelText="Enter your full name:"
         />
-
-        {/* input number container */}
-        <Input
-          type="number"
-          id="mobileNumber"
-          placeholder="Enter your mobile number"
-          labelText="Mobile Number:"
-        />
-
         {/* input email id container */}
         <Input
           type="email"
