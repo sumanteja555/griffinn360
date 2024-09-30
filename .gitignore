@@ -1,20 +1,17 @@
-node_modules
-config.php
-vendor
-vendor/
-dist
-dist/
-D:\xampp_projects\griffinn360adventures\dist
 # Ignore node_modules folder
 node_modules/
+
+# Ignore vendor folder
+vendor/
 
 # Ignore log files
 *.log
 
 # Ignore build outputs
-/dist
-/build
 dist
+dist/
+build/
 
 # Ignore environment files
 .env
+config.php

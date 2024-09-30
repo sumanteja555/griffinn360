@@ -48,7 +48,8 @@ const Login = ({
 
     try {
       const response = await axios.post(
-        "http://localhost/griffinn360adventures/backend/login.php",
+        // "http://localhost/griffinn360adventures/backend/login.php",test
+        "/backend/login.php",
         formData
       );
 

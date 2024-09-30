@@ -1,10 +1,12 @@
 <?php
+
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Origin: https://griffinn360adventures.com");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT'] . '/griffinn360adventures');
+define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT']); //  . '/griffinn360adventures'
 
 $config= require PUBLIC_PATH . '/backend/config.php'; // Load the config.php file
 
@@ -103,6 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 http_response_code(500); // Internal Server Error
                 echo json_encode([
+                    'success' => true,
                     'message' => 'Signup failed due to a technical issue. Please try again later.',
                     'details' => $e->getMessage() // Optional: only show in dev mode for debugging
                 ]);

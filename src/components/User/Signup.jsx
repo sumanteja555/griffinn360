@@ -54,9 +54,12 @@ const Signup = ({
     // Sending form data to PHP backend
     try {
       const response = await axios.post(
-        "http://localhost/griffinn360adventures/backend/signup.php",
+        // "http://localhost/griffinn360adventures/backend/signup.php",test
+        "/backend/signup.php",
         formData
       );
+
+      // const data = await response.json();
 
       dispatch(
         snackbarActions.openBar({
@@ -66,10 +69,7 @@ const Signup = ({
       );
       handleToggle();
     } catch (error) {
-      // console.error(
-      //   "There was an error submitting the form:",
-      //   error.response.data.message
-      // );
+      // console.error("There was an error submitting the form:", error);
       dispatch(
         snackbarActions.openBar({
           type: "warning",
