@@ -2,7 +2,9 @@ node_modules
 config.php
 vendor
 vendor/
-
+dist
+dist/
+D:\xampp_projects\griffinn360adventures\dist
 # Ignore node_modules folder
 node_modules/
 

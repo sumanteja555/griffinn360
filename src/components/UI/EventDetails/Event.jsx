@@ -1,10 +1,8 @@
-// swiper.js slides imports
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { Autoplay } from "swiper/modules";
-
 // local css styles
 import styles from "./Event.module.css";
+
+// bootstrap carousel
+import Carousel from "react-bootstrap/Carousel";
 
 // component imports
 import Itinerary from "./Itinerary.jsx";
@@ -30,26 +28,17 @@ export default function Event({ event }) {
 
   return (
     <section className={styles.container}>
-      <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        modules={[Autoplay]}
-        className={`mySwiper ${styles.mySwiper}`}
-      >
+      <Carousel fade controls={false} indicators={false}>
         {images.map(({ img, title }) => {
           return (
-            <SwiperSlide key={title} className={styles.swiperSlide}>
+            <Carousel.Item key={title} className={styles.swiperSlide}>
               <figure className={styles.imgContainer}>
                 <img src={img} alt={title} loading="lazy" />
               </figure>
-            </SwiperSlide>
+            </Carousel.Item>
           );
         })}
-      </Swiper>
+      </Carousel>
 
       <p className={styles.eventName}>{title}</p>
       <p className={styles.title}>Itinerary</p>

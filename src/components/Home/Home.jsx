@@ -14,9 +14,9 @@ export default function Home() {
       <Categories />
 
       {/* Reviews section */}
-      <section className={reviewStyles.reviewsMainContainer}>
+      {/* <section className={reviewStyles.reviewsMainContainer}>
         <Reviews />
-      </section>
+      </section> */}
 
       {/* Count or stats section */}
       <Count />

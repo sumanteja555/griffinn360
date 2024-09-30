@@ -1,7 +1,5 @@
 import styles from "./HomeCover.module.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { Autoplay } from "swiper/modules";
+import Carousel from "react-bootstrap/Carousel";
 
 // Import carousel images
 import homeCarouselOne from "../../../assets/home/homeCarouselOne.webp";
@@ -26,29 +24,18 @@ const carouselImages = [
 export default function HomeCover() {
   return (
     <div id={styles.homeCoverContainer}>
-      <Swiper
-        spaceBetween={30}
-        centeredSlides
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        loop
-        slidesPerView={1}
-        modules={[Autoplay]}
-        className={`${styles.mySwiper} mySwiper`}
-      >
+      <Carousel fade controls={false} indicators={false}>
         {carouselImages.map(({ alt, src }) => (
-          <SwiperSlide key={alt}>
+          <Carousel.Item key={alt}>
             <img
               src={src}
               alt={alt}
               className={styles.carouselImage}
               loading="lazy"
             />
-          </SwiperSlide>
+          </Carousel.Item>
         ))}
-      </Swiper>
+      </Carousel>
     </div>
   );
 }

@@ -34,7 +34,6 @@
     "react-visual-grid": "^0.9.5",
     "react-wavify": "^1.10.0",
     "redux-persist": "^6.0.0",
-    "swiper": "^11.1.4",
     "tailwind-merge": "^2.2.2"
   },
   "devDependencies": {
