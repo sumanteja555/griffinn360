@@ -7,7 +7,7 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Include JWT library
 require_once '../vendor/autoload.php';
-define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT'] . '/griffinn360adventures');
+define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT']); // . '/griffinn360adventures'
 
 $config= require PUBLIC_PATH . '/backend/config.php'; // Load the config.php file
 

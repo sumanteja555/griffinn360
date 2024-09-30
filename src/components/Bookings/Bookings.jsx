@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import styles from "./Bookings.module.css";
 
 const Bookings = () => {
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState(null);
   const userNumber = useSelector((state) => state.user.number); // Assuming user is stored in Redux
 
   useEffect(() => {
@@ -12,7 +12,9 @@ const Bookings = () => {
     const fetchBookings = async () => {
       try {
         const response = await fetch(
-          `http://localhost/griffinn360adventures/backend/bookings.php?number=${userNumber}`,
+          // `http://localhost/griffinn360adventures/backend/bookings.php?number=${userNumber}`,
+
+          `/backend/bookings.php?number=${userNumber}`,
           {
             method: "GET", // Specify the GET method
             headers: {
@@ -42,7 +44,7 @@ const Bookings = () => {
     <section className={styles.container}>
       <h2 className={styles.heading}>My Bookings</h2>
 
-      {bookings ? (
+      {bookings && bookings.length > 0 ? (
         bookings.map(
           ({
             event_name,
