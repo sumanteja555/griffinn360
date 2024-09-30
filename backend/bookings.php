@@ -6,7 +6,15 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Include database configuration file
-include 'dbConfig.php';
+define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT'] . '/griffinn360adventures');
+
+$config= require PUBLIC_PATH . '/config.php'; // Load the config.php file
+
+$servername = $config['servername'];
+$username=$config['username'];
+$dbpassword = $config['dbpassword'];
+$dbname = $config['dbnamem'];
+
 
 $conn = new mysqli($servername, $username, $dbpassword, $dbname);
 

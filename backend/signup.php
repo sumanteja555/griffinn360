@@ -4,7 +4,14 @@ header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-include 'dbConfig.php';
+define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT'] . '/griffinn360adventures');
+
+$config= require PUBLIC_PATH . '/config.php'; // Load the config.php file
+
+$servername = $config['servername'];
+$username=$config['username'];
+$dbpassword = $config['dbpassword'];
+$dbname = $config['dbnamem'];
 
 // Example response for a successful request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -6,15 +6,19 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Include JWT library
 require_once '../vendor/autoload.php';
+define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT'] . '/griffinn360adventures');
+
+$config= require PUBLIC_PATH . '/config.php'; // Load the config.php file
 
 use \Firebase\JWT\JWT;
 
 // Set your secret key for signing the JWT
-$secret_key = "Vsum@n@1312";
+$secret_key = $config['jwt_secret_key'];
 
-include 'dbConfig.php';
-
-// Your existing PHP code here (e.g., for handling signup)
+$servername = $config['servername'];
+$username=$config['username'];
+$dbpassword = $config['dbpassword'];
+$dbname = $config['dbnamem'];
 
 // Example response for a successful request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -10,7 +10,7 @@ import { userActions, snackbarActions } from "../../store/store";
 const loginDetails = [
   {
     id: "email",
-    labelText: "Enter your registered email id or mobile number",
+    labelText: "Enter your registered mobile number",
     placeholder: "Email / Number",
     type: "text",
   },
