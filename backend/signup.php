@@ -11,7 +11,7 @@ $config= require PUBLIC_PATH . '/config.php'; // Load the config.php file
 $servername = $config['servername'];
 $username=$config['username'];
 $dbpassword = $config['dbpassword'];
-$dbname = $config['dbnamem'];
+$dbname = $config['dbname'];
 
 // Example response for a successful request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

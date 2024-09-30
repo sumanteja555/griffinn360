@@ -13,7 +13,7 @@ $config= require PUBLIC_PATH . '/config.php'; // Load the config.php file
 $servername = $config['servername'];
 $username=$config['username'];
 $dbpassword = $config['dbpassword'];
-$dbname = $config['dbnamem'];
+$dbname = $config['dbname'];
 
 
 $conn = new mysqli($servername, $username, $dbpassword, $dbname);

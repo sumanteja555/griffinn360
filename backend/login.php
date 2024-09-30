@@ -18,7 +18,7 @@ $secret_key = $config['jwt_secret_key'];
 $servername = $config['servername'];
 $username=$config['username'];
 $dbpassword = $config['dbpassword'];
-$dbname = $config['dbnamem'];
+$dbname = $config['dbname'];
 
 // Example response for a successful request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
