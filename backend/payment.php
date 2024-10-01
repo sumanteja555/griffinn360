@@ -11,11 +11,11 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT']);// . '/griffinn360adventures'
 
-$config= require PUBLIC_PATH . '/backend/config.php'; // Load the config.php file
+$config= require __DIR__ . '/config.php'; // Load the config.php file
 
 
 // Include the Razorpay PHP SDK via Composer's autoload
-require PUBLIC_PATH . '/vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use Razorpay\Api\Api;
 

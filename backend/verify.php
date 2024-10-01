@@ -6,9 +6,7 @@ header("Access-Control-Allow-Origin: https://griffinn360adventures.com");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT']); // . '/griffinn360adventures'
-
-$config= require PUBLIC_PATH . '/backend/config.php'; // Load the config.php file
+$config= require __DIR__ . '/config.php';; // Load the config.php file
 
 
 // Handle preflight requests
