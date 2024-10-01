@@ -6,7 +6,7 @@ header("Access-Control-Allow-Origin: https://griffinn360adventures.com");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT'] . '/griffinn360adventures');
+define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT']); // . '/griffinn360adventures'
 
 $config= require PUBLIC_PATH . '/backend/config.php'; // Load the config.php file
 
@@ -24,7 +24,8 @@ header('Content-Type: application/json');
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (empty($data)) {
-    echo json_encode(['error' => 'No data received']);
+    echo json_encode([
+        'error' => 'No data received']);
     exit();
 }
 

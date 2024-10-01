@@ -41,7 +41,8 @@ export default function BookNow() {
   async function createOrder(amount) {
     try {
       const response = await fetch(
-        "http://localhost/griffinn360adventures/backend/payment.php",
+        // "http://localhost/griffinn360adventures/backend/payment.php",
+        "/backend/payment.php",
         {
           method: "POST",
           headers: {
@@ -94,7 +95,8 @@ export default function BookNow() {
   const hanldeBooking = async (bookingData) => {
     try {
       const response = await fetch(
-        "http://localhost/griffinn360adventures/backend/bookings.php",
+        // "http://localhost/griffinn360adventures/backend/bookings.php",
+        "/backend/bookings.php",
         {
           method: "POST",
           headers: {
@@ -129,7 +131,8 @@ export default function BookNow() {
           // verifying order
           try {
             const result = await fetch(
-              "http://localhost/griffinn360adventures/backend/verify.php",
+              // "http://localhost/griffinn360adventures/backend/verify.php",
+              "/backend/verify.php",
               {
                 method: "POST",
                 headers: {

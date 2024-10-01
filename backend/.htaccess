@@ -1,5 +1,13 @@
-# .htaccess inside /backend directory
+# Enable Rewrite Engine
 
-# Deny all access to this folder
-Order Deny,Allow
-Deny from all
+RewriteEngine On
+
+# Allow requests from specific domains
+
+RewriteCond %{HTTP_REFERER} ^https://griffinn360adventures.com [NC,OR]
+RewriteCond %{HTTP_REFERER} ^https://www.griffinn360adventures.com [NC]
+RewriteRule ^ - [L]
+
+# Deny access for all other requests
+
+RewriteRule ^ - [F,L]

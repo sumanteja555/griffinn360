@@ -14,4 +14,6 @@ build/
 
 # Ignore environment files
 .env
+.env.development
+.env.production
 config.php

@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // payment.php
 header('Content-Type: application/json');
@@ -7,7 +9,7 @@ header("Access-Control-Allow-Origin: https://griffinn360adventures.com");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT'] . '/griffinn360adventures');
+define('PUBLIC_PATH', $_SERVER['DOCUMENT_ROOT']);// . '/griffinn360adventures'
 
 $config= require PUBLIC_PATH . '/backend/config.php'; // Load the config.php file
 
@@ -22,6 +24,7 @@ $api = new Api($config['razorpay_key_id'], $config['razorpay_key_secret']);
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    
     exit();
 }
 
