@@ -33,6 +33,9 @@ const Login = ({
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const from = location.state?.from?.pathname || "/";
 
+  // backend url
+  const backendURL = process.env.REACT_BACKEND_URL;
+
   useEffect(() => {
     if (isLoggedIn) {
       navigate(from, { replace: true });
@@ -47,11 +50,7 @@ const Login = ({
     e.preventDefault(); // Prevent default form submission
 
     try {
-      const response = await axios.post(
-        // "http://localhost/griffinn360adventures/backend/login.php",test
-        "/backend/login.php",
-        formData
-      );
+      const response = await axios.post(`${backendURL}/login.php`, formData);
 
       if (response.data.success) {
         const token = response.data.token;

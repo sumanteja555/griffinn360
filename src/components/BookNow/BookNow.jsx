@@ -16,8 +16,10 @@ export default function BookNow() {
   const price = useSelector((state) => state.cart.price);
   const userNumber = useSelector((state) => state.user.number);
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+
+  // backend url
+  const backendURL = process.env.REACT_BACKEND_URL;
 
   const [amount, setAmount] = useState(price);
   const [minDate, setMinDate] = useState("");
@@ -40,17 +42,13 @@ export default function BookNow() {
   // function for creating the order
   async function createOrder(amount) {
     try {
-      const response = await fetch(
-        // "http://localhost/griffinn360adventures/backend/payment.php",
-        "/backend/payment.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ amount }),
-        }
-      );
+      const response = await fetch(`${backendURL}/payment.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ amount }),
+      });
       const data = await response.json();
       return data;
     } catch (error) {
@@ -94,17 +92,13 @@ export default function BookNow() {
 
   const hanldeBooking = async (bookingData) => {
     try {
-      const response = await fetch(
-        // "http://localhost/griffinn360adventures/backend/bookings.php",
-        "/backend/bookings.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(bookingData),
-        }
-      );
+      const response = await fetch(`${backendURL}/bookings.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      });
       const data = response.json();
     } catch (error) {}
   };
@@ -130,17 +124,13 @@ export default function BookNow() {
         handler: async function (response) {
           // verifying order
           try {
-            const result = await fetch(
-              // "http://localhost/griffinn360adventures/backend/verify.php",
-              "/backend/verify.php",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(response),
-              }
-            );
+            const result = await fetch(`${backendURL}/verify.php`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(response),
+            });
             const data = await result.json();
 
             const bookingData = {

@@ -7,6 +7,9 @@ const Bookings = () => {
   const [bookings, setBookings] = useState(null);
   const userNumber = useSelector((state) => state.user.number); // Assuming user is stored in Redux
 
+  // backend url
+  const backendURL = process.env.REACT_BACKEND_URL;
+
   useEffect(() => {
     // Fetch bookings from backend using GET
     const fetchBookings = async () => {
@@ -14,7 +17,7 @@ const Bookings = () => {
         const response = await fetch(
           // `http://localhost/griffinn360adventures/backend/bookings.php?number=${userNumber}`,
 
-          `/backend/bookings.php?number=${userNumber}`,
+          `${backendURL}/bookings.php?number=${userNumber}`,
           {
             method: "GET", // Specify the GET method
             headers: {
