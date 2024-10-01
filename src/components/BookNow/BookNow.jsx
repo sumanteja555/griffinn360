@@ -19,7 +19,7 @@ export default function BookNow() {
   const dispatch = useDispatch();
 
   // backend url
-  const backendURL = process.env.REACT_BACKEND_URL;
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   const [amount, setAmount] = useState(price);
   const [minDate, setMinDate] = useState("");

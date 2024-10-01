@@ -1,38 +1,29 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 import styles from "./Bookings.module.css";
 
 const Bookings = () => {
-  const [bookings, setBookings] = useState(null);
+  const [bookings, setBookings] = useState([]);
   const userNumber = useSelector((state) => state.user.number); // Assuming user is stored in Redux
 
   // backend url
-  const backendURL = process.env.REACT_BACKEND_URL;
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     // Fetch bookings from backend using GET
     const fetchBookings = async () => {
       try {
-        const response = await fetch(
-          // `http://localhost/griffinn360adventures/backend/bookings.php?number=${userNumber}`,
-
-          `${backendURL}/bookings.php?number=${userNumber}`,
-          {
-            method: "GET", // Specify the GET method
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch bookings");
-        }
-
-        const data = await response.json();
-
-        setBookings(data);
+        const response = await axios.get(`${backendURL}/bookings.php`, {
+          params: {
+            number: userNumber, // Pass the user number as a query parameter
+          },
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setBookings(response.data); // Set bookings from the response data
       } catch (error) {
         // console.error("Error fetching bookings:", error);
       }

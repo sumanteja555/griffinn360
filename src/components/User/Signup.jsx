@@ -45,7 +45,7 @@ const Signup = ({
   const dispatch = useDispatch();
 
   // backend url
-  const backendURL = process.env.REACT_BACKEND_URL;
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

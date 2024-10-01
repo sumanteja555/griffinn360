@@ -34,7 +34,7 @@ const Login = ({
   const from = location.state?.from?.pathname || "/";
 
   // backend url
-  const backendURL = process.env.REACT_BACKEND_URL;
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     if (isLoggedIn) {
