@@ -60,7 +60,7 @@ const adventurePark = [
         description: `Ready to challenge yourself and experience the thrill of climbing? Our wall 
         climbing adventure offers an exhilarating opportunity to test your strength, agility, and 
         determination as you ascend to new heights!`,
-        price: "250",
+        price: "200",
         book: true,
       },
       {
