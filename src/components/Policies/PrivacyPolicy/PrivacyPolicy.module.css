@@ -1,0 +1,13 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 5rem;
+}
+
+.heading {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.7rem;
+  color: var(--secondaryColor);
+  margin-bottom: 3rem;
+}

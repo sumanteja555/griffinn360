@@ -28,6 +28,14 @@ const User = lazy(() => import("./components/User/User.jsx"));
 
 const Bookings = lazy(() => import("./components/Bookings/Bookings.jsx"));
 
+// policypages
+const PrivacyPolicy = lazy(() =>
+  import("./components/Policies/PrivacyPolicy/PrivacyPolicy.jsx")
+);
+
+const CancellationPolicy = lazy(() =>
+  import("./components/Policies/CancellationPolicy/CancellationPolicy.jsx")
+);
 import PrivateRoute from "./pages/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
@@ -141,6 +149,24 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <VolunteerPage />
+          </Suspense>
+        ),
+      },
+
+      // policy pages
+      {
+        path: "/privacypolicy",
+        element: (
+          <Suspense>
+            <PrivacyPolicy />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/cancellationpolicy",
+        element: (
+          <Suspense>
+            <CancellationPolicy />
           </Suspense>
         ),
       },
