@@ -13,7 +13,6 @@ const ContactusPage = lazy(() =>
 ); //contact us page import
 const NightscampsPage = lazy(() => import("./pages/NightCamps.jsx")); //nightcamps page import
 const BooknowPage = lazy(() => import("./components/BookNow/BookNow.jsx")); //booknow component import
-const PoliciesPage = lazy(() => import("./components/Policies/Policies.jsx")); //policies page import
 const VolunteerPage = lazy(() =>
   import("./components/Volunteer/Volunteer.jsx")
 ); //volunteer page import
@@ -194,14 +193,7 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      {
-        path: "/policies",
-        element: (
-          <Suspense>
-            <PoliciesPage />
-          </Suspense>
-        ),
-      },
+
       {
         path: "/paymentsuccess",
         element: (
