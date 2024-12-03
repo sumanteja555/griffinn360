@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 
-export default function ImpLinks({ title, links }) {
+export default function WebLinks({ title, links }) {
   return (
     <div className={styles.divContainer}>
       <p className={styles.title}>{title}</p>

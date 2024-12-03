@@ -1,7 +1,8 @@
 import styles from "./Footer.module.css";
-import ImpLinks from "./ImpLinks";
+import WebLinks from "./WebLinks";
 
 import SocialLinks from "./SocialLinks";
+import PolicyLinks from "./PolicyLinks";
 
 const webLinks = {
   title: "Quick Links",
@@ -55,7 +56,8 @@ export default function Footer() {
           Life changing travel experiences curated by us.
         </p>
       </div>
-      <ImpLinks {...webLinks} />
+      <WebLinks {...webLinks} />
+      <PolicyLinks />
       <SocialLinks />
     </footer>
   );

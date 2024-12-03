@@ -2,8 +2,8 @@
   max-width: 100%;
   background: linear-gradient(var(--primaryColor), var(--secondaryColor));
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
   padding: 2rem;
 }
 
@@ -115,6 +115,21 @@
 #phone:hover > a {
   background: #0782ef;
   transition: all 0.2s ease-in;
+}
+
+/* policies container */
+.policiesContainer {
+  text-align: center;
+}
+
+.policiesContainer > p:first-of-type {
+  font-size: 1.7rem;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 @media screen and (max-width: 576px) {
   .footer {
