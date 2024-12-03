@@ -2,6 +2,8 @@
   width: 80%;
   margin: 0 auto;
   padding-bottom: 5rem;
+  letter-spacing: 0.1rem;
+  text-align: justify;
 }
 
 .heading {

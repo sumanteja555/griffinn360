@@ -2,6 +2,8 @@
   width: 80%;
   margin: 0 auto;
   padding-bottom: 5rem;
+  letter-spacing: 0.1rem;
+  text-align: justify;
 }
 
 .heading {
@@ -10,4 +12,14 @@
   letter-spacing: 0.7rem;
   color: var(--secondaryColor);
   margin-bottom: 3rem;
+}
+
+.container > p:first-of-type {
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  line-height: 2rem;
+}
+
+.container > h3 {
+  color: var(--secondaryColor);
 }

@@ -1,0 +1,18 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 2rem 0 5rem 0;
+  letter-spacing: 0.1rem;
+  text-align: justify;
+}
+
+.container > ul > li {
+  margin-top: 1rem;
+}
+
+.container > ul > li > ol > li {
+  margin-top: 1rem;
+}
+.container > p:last-of-type {
+  margin-top: 2rem;
+}

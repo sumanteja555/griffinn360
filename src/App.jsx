@@ -36,6 +36,14 @@ const PrivacyPolicy = lazy(() =>
 const CancellationPolicy = lazy(() =>
   import("./components/Policies/CancellationPolicy/CancellationPolicy.jsx")
 );
+
+const TermsConditions = lazy(() =>
+  import("./components/Policies/TermsCondtitions/TermsConditions.jsx")
+);
+
+const ReleaseofLibality = lazy(() =>
+  import("./components/Policies/ReleaseofLiability/ReleaseofLiability.jsx")
+);
 import PrivateRoute from "./pages/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
@@ -167,6 +175,22 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <CancellationPolicy />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/terms&conditions",
+        element: (
+          <Suspense>
+            <TermsConditions />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/releaseofliability",
+        element: (
+          <Suspense>
+            <ReleaseofLibality />
           </Suspense>
         ),
       },

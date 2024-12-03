@@ -1,0 +1,18 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 2rem 0 5rem 0;
+  letter-spacing: 0.1rem;
+  text-align: justify;
+}
+
+.container > h3 {
+  color: var(--secondaryColor);
+  padding-top: 2rem;
+}
+
+.container > p:last-of-type {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+}
