@@ -6,7 +6,7 @@ const ReleaseofLibality = () => {
       <h1>RELEASE OF LIABILITY</h1>
       <p>III. RELEASE OF LIABILITY, WAIVER OF CLAIMS, ASSUMPTION OF RISKS:</p>
       <p>
-        Release of Liability Agreement This agreement releases Cliff-In
+        Release of Liability Agreement This agreement releases griff-In
         Adventures (Company) from all liabilities relating to injuries that may
         happen during an activity, on a location, etc.
       </p>
@@ -47,7 +47,7 @@ const ReleaseofLibality = () => {
           possession during the tour.
         </li>
         <li>
-          I agree that Cliff-Inn Adventures is not liable for delay or
+          I agree that griff-Inn Adventures is not liable for delay or
           cancellation resulting from acts of fire, natural disaster, strikes,
           or civil disturbance.
         </li>
