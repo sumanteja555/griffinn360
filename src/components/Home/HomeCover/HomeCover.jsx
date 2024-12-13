@@ -27,12 +27,7 @@ export default function HomeCover() {
       <Carousel fade controls={false} indicators={false}>
         {carouselImages.map(({ alt, src }) => (
           <Carousel.Item key={alt}>
-            <img
-              src={src}
-              alt={alt}
-              className={styles.carouselImage}
-              loading="lazy"
-            />
+            <img src={src} alt={alt} className={styles.carouselImage} />
           </Carousel.Item>
         ))}
       </Carousel>
