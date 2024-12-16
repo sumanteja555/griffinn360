@@ -1,6 +1,8 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import ScrollToTop from "./utils/scrollToTop.js";
+
 // Component Imports
 import RootLayout from "./pages/RootLayout";
 import { lazy, Suspense } from "react";
@@ -228,7 +230,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}></RouterProvider>
     </>
   );
 }
