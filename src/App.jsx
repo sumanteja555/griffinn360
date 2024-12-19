@@ -1,7 +1,7 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import ScrollToTop from "./utils/scrollToTop.js";
+import react from "react";
 
 // Component Imports
 import RootLayout from "./pages/RootLayout";
