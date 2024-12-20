@@ -1,18 +1,18 @@
 const volunteer = [
   {
-    name: "userEmail",
-    type: "email",
-    required: true,
-    label: "Email",
-  },
-  {
-    name: "userName",
+    name: "name",
     type: "text",
     required: true,
     label: "Enter your Full Name",
   },
   {
-    name: "number",
+    name: "email",
+    type: "email",
+    required: true,
+    label: "Email",
+  },
+  {
+    name: "mobile",
     type: "number",
     required: true,
     label: "Enter your Mobile Number",
@@ -24,18 +24,11 @@ const volunteer = [
     label: "Enter your profession",
   },
   {
-    name: "native",
+    name: "address",
     type: "text",
     required: false,
-    label: "Native of",
+    label: "Your Address",
   },
-  {
-    name: "currentResidence",
-    type: "text",
-    required: false,
-    label: "Currently Residing at",
-  },
-
   {
     name: "socialProfile",
     type: "text",
