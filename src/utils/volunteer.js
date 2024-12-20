@@ -30,13 +30,13 @@ const volunteer = [
     label: "Your Address",
   },
   {
-    name: "socialProfile",
+    name: "linkedin",
     type: "text",
     required: false,
     label: "Enter your LinkedIn profile",
   },
   {
-    name: "igProfile",
+    name: "instagram",
     type: "text",
     required: false,
     label: "Enter your instagram profile id",

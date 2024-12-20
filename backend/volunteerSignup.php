@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mobile_number = $data['mobile'] ?? '';
     $profession = $data['profession'] ?? '';
     $address = $data['address'] ?? '';
-    $linkedin_url = $data['linkedin_url'] ?? '';
-    $instagram_url = $data['instagram_url'] ?? '';
+    $linkedin_url = $data['linkedin'] ?? '';
+    $instagram_url = $data['instagram'] ?? '';
     $experience = $data['experience'] ?? '';
-    $other_info = $data['other_info'] ?? '';
-    $selected_options = isset($data['selected_options']) ? implode(",", $data['selected_options']) : '';
+    $other_info = $data['otherInfo'] ?? '';
+    $selected_options = isset($data['contributions']) ? implode(",", $data['selected_options']) : '';
 
     // Validation
     $errorMessage = '';
