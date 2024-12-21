@@ -27,6 +27,7 @@
   grid-template-columns: 1fr 2fr;
   margin: 0;
   padding: 0 5%;
+  align-items: center;
 }
 .imgContainer {
   width: 100%;
@@ -64,4 +65,37 @@
 
 .infoContainer > p:first-of-type {
   text-align: justify;
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  .reviewsContainer {
+    height: 50vh;
+    max-height: 50vh;
+  }
+  .review {
+    height: 50vh;
+    max-height: 50vh;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .reviewsContainer,
+  .review {
+    width: auto;
+    max-width: 90vw;
+    height: 60vh;
+    max-height: 100vh;
+  }
+  .review {
+    grid-template-columns: 1fr;
+    align-items: initial;
+  }
+
+  .imgContainer {
+    padding: 1rem 0;
+  }
+
+  .infoContainer {
+    padding: 0;
+  }
 }

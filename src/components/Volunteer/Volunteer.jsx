@@ -100,14 +100,13 @@ export default function Volunteer() {
         );
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
+      // console.error("Error submitting form:", error);
       dispatch(
         snackbarActions.openBar({
           type: "warning",
           message: "An error occured. Please try again later.",
         })
       );
-      alert("Error submitting form. Please try again later.");
     }
   };
   return (
