@@ -27,7 +27,7 @@ export default function BookNow() {
   // min date for booking
   useEffect(() => {
     const today = new Date();
-    today.setDate(today.getDate() + 1); // Set to tomorrow's date
+    today.setDate(today.getDate()); // Set to tomorrow's date
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed
     const day = String(today.getDate()).padStart(2, "0");

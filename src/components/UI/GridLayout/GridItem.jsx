@@ -21,7 +21,7 @@ export default function GridItem({ item }) {
       </figure>
       <div className={styles.infoContainer}>
         <h2 className={styles.title}>{title}</h2>
-        {/* <p className={styles.description}>{description}</p> */}
+        <p className={styles.description}>{description}</p>
         {price && <p className={styles.price}>Rs: {price}/-</p>}
 
         {book ? (
