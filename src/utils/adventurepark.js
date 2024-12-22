@@ -92,7 +92,7 @@ const adventurePark = [
       },
       {
         title: "Mega Package",
-        img: cycling,
+        img: indoorGames,
         description: `Includes Ground Cycling, Archery, Kayaking, Rope Course, Rifle Shooting, Wall Climbing, Zip Lining, Indoor Games,
         Obstacle Course, Sky Cycling, Rapelling.  Total 11 Activities Rs: 1650. This Package has 25% discount.Ziplining, Sky Cycling, Wall Climbing,
         Archery, Rope Course, Ground Cycling, Indoor Games, Rapelling, Rifle Shooting, Kayaking, Obstacle Course.`,
@@ -101,7 +101,7 @@ const adventurePark = [
       },
       {
         title: "Kiddos Package",
-        img: cycling,
+        img: indoorGames,
         description: `Includes Ground Cycling, Archery, Kayaking, Rope Course, Rifle Shooting, Wall Climbing, Zip Lining, Indoor Games,
         Obstacle Course.  Total 8 Activities Rs: 900. This Package has 25% discount. Zipline, Wall Climbing, Archery, Rope Course, Ground Cycling, 
         Indoor Games, Kayaking, Obstacle Course`,
@@ -110,7 +110,7 @@ const adventurePark = [
       },
       {
         title: "Power Play Package",
-        img: cycling,
+        img: indoorGames,
         description: `Includes Ground Cycling, Archery, Kayaking, Rope Course, Rifle Shooting, Wall Climbing, Zip Lining, Indoor Games,
         Obstacle Course.  Total 7 Activities Rs: 1150. This Package has 25% discount. Zipline, Sky Cycling, wall Climbing, Indoor Games, 
         Rifle Shooting, Kayaking, Obstacle course`,
