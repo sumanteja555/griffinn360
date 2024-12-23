@@ -7,6 +7,9 @@ import wallClimbing from "../assets/adventureActivities/wallClimbing.webp";
 import zipLining from "../assets/adventureActivities/zipLining.webp";
 import indoorGames from "../assets/adventureActivities/indoorGames.webp";
 import cycling from "../assets/adventureActivities/cycling.webp";
+import megaPackage from "../assets/adventureActivities/megaPackage.webp";
+import kiddosPackage from "../assets/adventureActivities/kiddosPackage.webp";
+import powerplayPackage from "../assets/adventureActivities/powerplayPackage.webp";
 
 const adventurePark = [
   {
@@ -92,7 +95,7 @@ const adventurePark = [
       },
       {
         title: "Mega Package",
-        img: indoorGames,
+        img: megaPackage,
         description: `Includes Ground Cycling, Archery, Kayaking, Rope Course, Rifle Shooting, Wall Climbing, Zip Lining, Indoor Games,
         Obstacle Course, Sky Cycling, Rapelling.  Total 11 Activities Rs: 1650. This Package has 25% discount.Ziplining, Sky Cycling, Wall Climbing,
         Archery, Rope Course, Ground Cycling, Indoor Games, Rapelling, Rifle Shooting, Kayaking, Obstacle Course.`,
@@ -101,7 +104,7 @@ const adventurePark = [
       },
       {
         title: "Kiddos Package",
-        img: indoorGames,
+        img: kiddosPackage,
         description: `Includes Ground Cycling, Archery, Kayaking, Rope Course, Rifle Shooting, Wall Climbing, Zip Lining, Indoor Games,
         Obstacle Course.  Total 8 Activities Rs: 900. This Package has 25% discount. Zipline, Wall Climbing, Archery, Rope Course, Ground Cycling, 
         Indoor Games, Kayaking, Obstacle Course`,
@@ -110,7 +113,7 @@ const adventurePark = [
       },
       {
         title: "Power Play Package",
-        img: indoorGames,
+        img: powerplayPackage,
         description: `Includes Ground Cycling, Archery, Kayaking, Rope Course, Rifle Shooting, Wall Climbing, Zip Lining, Indoor Games,
         Obstacle Course.  Total 7 Activities Rs: 1150. This Package has 25% discount. Zipline, Sky Cycling, wall Climbing, Indoor Games, 
         Rifle Shooting, Kayaking, Obstacle course`,
