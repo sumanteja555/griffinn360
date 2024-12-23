@@ -1,8 +1,9 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import UserRoutes from "./pages/UserRoutes";
+import AdminRoutes from "./pages/AdminPages/AdminRoutes";
 
-const router = createBrowserRouter([{ ...UserRoutes }]);
+const router = createBrowserRouter([{ ...UserRoutes }, { ...AdminRoutes }]);
 
 function App() {
   return (

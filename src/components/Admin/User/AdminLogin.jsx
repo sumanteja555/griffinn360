@@ -1,46 +1,45 @@
 import axios from "axios";
-import styles from "./User.module.css";
-import Input, { PasswordInput } from "./Input";
+import styles from "./AdminUser.module.css";
+import Input, { PasswordInput } from "./AdminInput";
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"; // Import useDispatch and useSelector
 import { useLocation, useNavigate } from "react-router-dom";
-import { userActions, snackbarActions } from "../../store/store";
+import { adminActions, snackbarActions } from "../../../store/store.js";
 
 const loginDetails = [
   {
-    id: "email",
-    labelText: "Enter your registered mobile number",
-    placeholder: "Email / Number",
+    id: "adminId",
+    labelText: "Enter your admin user id:",
+    placeholder: "Enter your admin user id",
     type: "text",
   },
 ];
 
 const AdminLogin = ({
-  handleToggle,
   passwordVisible,
   handlePasswordVisible,
   handlePasswordInvisible,
 }) => {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    adminId: "",
+    adminPassword: "",
   });
 
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const from = location.state?.from?.pathname || "/";
+  const isAdminLoggedIn = useSelector((state) => state.admin.isAdminLoggedIn);
+  const from = location.state?.from?.pathname || "/admin";
 
   // backend url
   const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isAdminLoggedIn) {
       navigate(from, { replace: true });
     }
-  }, [isLoggedIn, navigate, from]);
+  }, [isAdminLoggedIn, navigate, from]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,18 +47,21 @@ const AdminLogin = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
+    console.log(formData);
 
     try {
-      const response = await axios.post(`${backendURL}/login.php`, formData);
+      const response = await axios.post(
+        `${backendURL}/adminLogin.php`,
+        formData
+      );
 
       if (response.data.success) {
         const token = response.data.token;
 
         // Dispatch the setUser action to store token and user info in Redux
         dispatch(
-          userActions.setUser({
+          adminActions.setUser({
             token: token,
-            name: response.data.username, // Assuming the name or email comes from formData or decoded token
           })
         );
 
@@ -103,16 +105,6 @@ const AdminLogin = ({
             passwordVisible={passwordVisible}
           />
 
-          <p className={styles.toggleContainer}>
-            Already have an account? Click Here to
-            <button
-              type="button"
-              className={styles.toggleBtn}
-              onClick={handleToggle}
-            >
-              Signup
-            </button>
-          </p>
           <input type="submit" value="Log In" className={styles.userBtn} />
         </form>
       </div>
@@ -120,4 +112,4 @@ const AdminLogin = ({
   );
 };
 
-export default Login;
+export default AdminLogin;

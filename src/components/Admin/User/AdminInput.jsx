@@ -1,4 +1,4 @@
-import styles from "./User.module.css";
+import styles from "./AdminUser.module.css";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
@@ -29,8 +29,8 @@ export function PasswordInput({
       <label>Enter your password :</label>
       <input
         type={passwordVisible ? "text" : "password"}
-        name="password"
-        id="password"
+        name="adminPassword"
+        id="adminPassword"
         required
         placeholder="Enter Your Password"
         onChange={handleChange}

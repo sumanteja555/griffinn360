@@ -84,6 +84,36 @@ const userSlice = createSlice({
   },
 });
 
+const intialAdminSlice = {
+  isAdminLoggedIn: false,
+  adminToken: null,
+};
+
+const adminSlice = createSlice({
+  name: "admin",
+  initialState: intialAdminSlice,
+  reducers: {
+    setUser(state, action) {
+      const token = action.payload.token;
+
+      if (isTokenExpired(token)) {
+        // If token is expired, reset user state to initial values
+        state.isAdminLoggedIn = false;
+        state.adminToken = null;
+      } else {
+        // If token is valid, set user details
+        const decodedToken = jwtDecode(token);
+        state.isAdminLoggedIn = true;
+        state.adminToken = token;
+      }
+    },
+    clearUser(state) {
+      state.isAdminLoggedIn = false;
+      state.adminToken = null;
+    },
+  },
+});
+
 const initialSnackbarState = { isOpen: false, type: null, message: null };
 
 const snackbarSlice = createSlice({
@@ -106,6 +136,7 @@ const rootReducer = combineReducers({
   cart: cartSlice.reducer,
   user: userSlice.reducer,
   snackbar: snackbarSlice.reducer,
+  admin: adminSlice.reducer,
 });
 
 // Apply persistReducer to the root reducer
@@ -126,5 +157,6 @@ const store = configureStore({
 export const cartActions = cartSlice.actions;
 export const userActions = userSlice.actions; // Export user actions
 export const snackbarActions = snackbarSlice.actions;
+export const adminActions = adminSlice.actions;
 export const persistor = persistStore(store);
 export default store;

@@ -1,25 +1,18 @@
 import { useState } from "react";
-import styles from "./User.module.css";
+import styles from "./AdminUser.module.css";
 
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 import AdminLogin from "./AdminLogin";
-import AdminSignup from "./AdminSignup";
 
-const User = () => {
-  const [signup, setSignup] = useState(false);
-
+const AdminUser = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn); // Get login status from Redux
+  const isAdminLoggedIn = useSelector((state) => state.admin.isAdminLoggedIn); // Get login status from Redux
 
-  if (isLoggedIn) {
-    return <Navigate to="/" replace />;
-  }
-
-  function handleToggle() {
-    setSignup(!signup);
+  if (isAdminLoggedIn) {
+    return <Navigate to="/admin" replace />;
   }
 
   function handlePasswordVisible() {
@@ -32,24 +25,15 @@ const User = () => {
   return (
     <>
       <div className={styles.userContainer}>
-        {signup ? (
-          <AdminSignup
-            handleToggle={handleToggle}
-            passwordVisible={passwordVisible}
-            handlePasswordVisible={handlePasswordVisible}
-            handlePasswordInvisible={handlePasswordInvisible}
-          />
-        ) : (
-          <AdminLogin
-            handleToggle={handleToggle}
-            passwordVisible={passwordVisible}
-            handlePasswordVisible={handlePasswordVisible}
-            handlePasswordInvisible={handlePasswordInvisible}
-          />
-        )}
+        <AdminLogin
+          passwordVisible={passwordVisible}
+          handlePasswordVisible={handlePasswordVisible}
+          handlePasswordInvisible={handlePasswordInvisible}
+        />
       </div>
+      <h1>admin user</h1>
     </>
   );
 };
 
-export default User;
+export default AdminUser;

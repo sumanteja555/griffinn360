@@ -5,9 +5,7 @@ import { lazy, Suspense } from "react";
 const HomePage = lazy(() => import("../components/Home/Home.jsx")); //home page import
 const AboutusPage = lazy(() => import("../components/AboutUs/AboutUs.jsx")); //about us page import
 const GallerPage = lazy(() => import("../components/Gallery/Gallery.jsx")); //gallery page import
-const ContactusPage = lazy(() =>
-  import("../components/ContactUs/ContactUs.jsx")
-); //contact us page import
+
 const NightscampsPage = lazy(() => import("./NightCamps.jsx")); //nightcamps page import
 const BooknowPage = lazy(() => import("../components/BookNow/BookNow.jsx")); //booknow component import
 const VolunteerPage = lazy(() =>
@@ -60,7 +58,7 @@ const UserRoutes = {
       ),
     },
     {
-      path: "/aboutus",
+      path: "aboutus",
       element: (
         <SuspenseWrapper>
           <AboutusPage />
@@ -68,7 +66,7 @@ const UserRoutes = {
       ),
     },
     {
-      path: "/gallery",
+      path: "gallery",
       element: (
         <SuspenseWrapper>
           <GallerPage />
@@ -76,23 +74,7 @@ const UserRoutes = {
       ),
     },
     {
-      path: "/contactus",
-      element: (
-        <SuspenseWrapper>
-          <ContactusPage />
-        </SuspenseWrapper>
-      ),
-    },
-    {
-      path: "/:trekId",
-      element: (
-        <SuspenseWrapper>
-          <TrekPage />
-        </SuspenseWrapper>
-      ),
-    },
-    {
-      path: "/nightcamps",
+      path: "nightcamps",
       element: (
         <SuspenseWrapper>
           <NightscampsPage />
@@ -100,7 +82,7 @@ const UserRoutes = {
       ),
     },
     {
-      path: "/:trekId",
+      path: ":trekId",
       children: [
         {
           index: true,
@@ -121,7 +103,7 @@ const UserRoutes = {
       ],
     },
     {
-      path: "/:trekId",
+      path: ":trekId",
       children: [
         {
           index: true,
@@ -142,7 +124,7 @@ const UserRoutes = {
       ],
     },
     {
-      path: "/booknow",
+      path: "booknow",
       element: (
         <PrivateRoute>
           <SuspenseWrapper>
@@ -152,7 +134,7 @@ const UserRoutes = {
       ),
     },
     {
-      path: "/volunteer",
+      path: "volunteer",
       element: (
         <SuspenseWrapper>
           <VolunteerPage />
@@ -162,7 +144,7 @@ const UserRoutes = {
 
     // policy pages
     {
-      path: "/privacypolicy",
+      path: "privacypolicy",
       element: (
         <SuspenseWrapper>
           <PrivacyPolicy />
@@ -170,7 +152,7 @@ const UserRoutes = {
       ),
     },
     {
-      path: "/cancellationpolicy",
+      path: "cancellationpolicy",
       element: (
         <SuspenseWrapper>
           <CancellationPolicy />
@@ -178,7 +160,7 @@ const UserRoutes = {
       ),
     },
     {
-      path: "/terms&conditions",
+      path: "terms&conditions",
       element: (
         <SuspenseWrapper>
           <TermsConditions />
@@ -186,7 +168,7 @@ const UserRoutes = {
       ),
     },
     {
-      path: "/releaseofliability",
+      path: "releaseofliability",
       element: (
         <SuspenseWrapper>
           <ReleaseofLibality />
@@ -195,7 +177,7 @@ const UserRoutes = {
     },
 
     {
-      path: "/paymentsuccess",
+      path: "paymentsuccess",
       element: (
         <SuspenseWrapper>
           <PaymentSuccessPage />
@@ -203,7 +185,7 @@ const UserRoutes = {
       ),
     },
     {
-      path: "/user",
+      path: "user",
       element: (
         <SuspenseWrapper>
           <User />
@@ -212,7 +194,7 @@ const UserRoutes = {
     },
 
     {
-      path: "/bookings",
+      path: "bookings",
       element: (
         <PrivateRoute>
           <SuspenseWrapper>

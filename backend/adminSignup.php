@@ -16,13 +16,13 @@ $dbname = $config['dbname'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
 
-    $username = $data['username'];
-    $password = $data['password'];
+    $adminId = $data['adminId'];
+    $adminPassword = $data['adminPassword'];
 
     $errorMessage = '';
 
     // Validate input fields
-    if (empty($username) || empty($password)) {
+    if (empty($adminId) || empty($adminPassword)) {
         $errorMessage .= "Username and password are required.";
     }
 
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode($response);
         exit;
     } else {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $hashedPassword = password_hash($adminPassword, PASSWORD_DEFAULT);
         $conn = new mysqli($servername, $username, $dbpassword, $dbname);
 
         // Check connection
@@ -45,8 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Check if admin already exists
-        $stmt = $conn->prepare("SELECT COUNT(*) FROM admin WHERE username = ?");
-        $stmt->bind_param("s", $username);
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM admin WHERE adminId = ?");
+        $stmt->bind_param("s", $adminId);
         $stmt->execute();
         $stmt->bind_result($count);
         $stmt->fetch();
@@ -62,13 +62,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             // Insert new admin
-            $stmt = $conn->prepare("INSERT INTO admin (username, password) VALUES (?, ?)");
+            $stmt = $conn->prepare("INSERT INTO admin (adminId, adminPassword) VALUES (?, ?)");
 
             if ($stmt === false) {
                 die("Error preparing statement: " . $conn->error);
             }
 
-            $stmt->bind_param("ss", $username, $hashedPassword);
+            $stmt->bind_param("ss", $adminId, $hashedPassword);
 
             if ($stmt->execute()) {
                 $response = [
