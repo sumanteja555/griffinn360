@@ -1,6 +1,6 @@
 {
     "require": {
-        "firebase/php-jwt": "*",
+        "firebase/php-jwt": "^6.10",
         "razorpay/razorpay": "^2.9",
         "rmccue/requests": "2.0.12"
     }

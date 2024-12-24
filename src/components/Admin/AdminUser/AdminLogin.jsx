@@ -47,7 +47,6 @@ const AdminLogin = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    console.log(formData);
 
     try {
       const response = await axios.post(

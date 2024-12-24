@@ -105,7 +105,6 @@ const adminSlice = createSlice({
         state.adminId = null;
       } else {
         // If token is valid, set user details
-        const decodedToken = jwtDecode(token);
         state.isAdminLoggedIn = true;
         state.adminToken = token;
         state.adminId = adminId;

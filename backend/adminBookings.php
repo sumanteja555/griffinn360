@@ -6,40 +6,58 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-
-$config= require __DIR__ . '/config.php'; // Load the config.php file
+$config = require __DIR__ . '/config.php'; // Load the config.php file
 
 $servername = $config['servername'];
-$username=$config['username'];
+$username = $config['username'];
 $dbpassword = $config['dbpassword'];
 $dbname = $config['dbname'];
-
 
 $conn = new mysqli($servername, $username, $dbpassword, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    die(json_encode(["status" => "error", "message" => "Connection failed: "]));
+    die(json_encode(["status" => "error", "message" => "Connection failed: " . $conn->connect_error]));
 }
 
-// SQL query to fetch all data from the bookings table
-$sql = "SELECT * FROM bookings";
-$result = $conn->query($sql);
 
-$bookings = [];
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
-// Check if the query returned any results
-if ($result->num_rows > 0) {
-    // Fetch each row and add it to the $bookings array
-    while ($row = $result->fetch_assoc()) {
-        $bookings[] = $row;
+    // Get `page` and `limit` parameters from the request, with default values
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+    $offset = ($page - 1) * $limit;
+
+    // Prepare the SQL query to fetch bookings with pagination
+    $sql = "SELECT * FROM bookings LIMIT ? OFFSET ?";
+    
+    if ($stmt = $conn->prepare($sql)) {
+
+         // Ensure $limit and $offset are integers
+    $limit = (int)$limit;
+    $offset = (int)$offset;
+        $stmt->bind_param("ii", $limit, $offset);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $bookings = [];
+        while ($row = $result->fetch_assoc()) {
+            $bookings[] = $row;
+        }
+
+        if (empty($bookings)) {
+            echo json_encode(["status" => "success", "data" => [], "message" => "No bookings found for the requested page."]);
+        } else {
+            echo json_encode(["status" => "success", "data" => $bookings]);
+        }
+
+        $stmt->close();
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error preparing query for fetching bookings."]);
     }
 }
 
-// Return the bookings in JSON format
-header('Content-Type: application/json');
-echo json_encode($bookings);
-
-// Close the database connection
+// Close the connection
 $conn->close();
 ?>

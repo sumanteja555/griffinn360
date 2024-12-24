@@ -14,8 +14,9 @@ function AdminNavbar() {
   const [expanded, setExpanded] = useState(false);
 
   const isAdminLoggedIn = useSelector((state) => state.admin.isAdminLoggedIn);
-  const adminIdNumbers = useSelector((state) => state.admin.adminId);
-  const adminId = adminIdNumbers.replace(/[0-9]/g, "");
+  const rawAdminId = useSelector((state) => state.admin.adminId);
+
+  const adminId = rawAdminId ? rawAdminId.replace(/[0-9]/g, "") : null;
   const dispatch = useDispatch();
 
   const handleToggle = () => {
@@ -84,7 +85,7 @@ function AdminNavbar() {
                 className="nav-link"
                 role="button"
                 tabIndex="0"
-                to="/admin/adminuser"
+                to="/admin"
                 onClick={handleSelect}
               >
                 Login
