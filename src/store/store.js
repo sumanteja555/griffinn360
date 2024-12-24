@@ -87,6 +87,7 @@ const userSlice = createSlice({
 const intialAdminSlice = {
   isAdminLoggedIn: false,
   adminToken: null,
+  adminId: null,
 };
 
 const adminSlice = createSlice({
@@ -95,21 +96,25 @@ const adminSlice = createSlice({
   reducers: {
     setUser(state, action) {
       const token = action.payload.token;
+      const adminId = action.payload.adminId;
 
       if (isTokenExpired(token)) {
         // If token is expired, reset user state to initial values
         state.isAdminLoggedIn = false;
         state.adminToken = null;
+        state.adminId = null;
       } else {
         // If token is valid, set user details
         const decodedToken = jwtDecode(token);
         state.isAdminLoggedIn = true;
         state.adminToken = token;
+        state.adminId = adminId;
       }
     },
     clearUser(state) {
       state.isAdminLoggedIn = false;
       state.adminToken = null;
+      state.adminId = null;
     },
   },
 });

@@ -1,14 +1,13 @@
 .userContainer {
   width: 100%;
   min-height: 100%;
-  background: url("../../assets/userbg.jpg");
+  background: url("../../../assets/userbg.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
-
   padding: 3rem 0;
 }
 
@@ -28,7 +27,7 @@
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
-.formContainer>h1 {
+.formContainer > h1 {
   text-transform: uppercase;
   letter-spacing: 0.2ch;
 }
@@ -52,7 +51,7 @@
   gap: 0.3rem;
 }
 
-.inputContainer>input {
+.inputContainer > input {
   background: transparent;
   padding: 0.5rem 0;
   border: none;
@@ -64,8 +63,8 @@
 }
 
 /* Change the underline color on focus */
-.inputContainer>input:focus,
-.inputContainer>input:hover {
+.inputContainer > input:focus,
+.inputContainer > input:hover {
   border-bottom: 3px solid rgb(2, 65, 123);
 
   &::placeholder {
@@ -73,19 +72,19 @@
   }
 }
 
-.inputContainer>input:user-invalid {
+.inputContainer > input:user-invalid {
   border-bottom: 2px solid red;
 }
 
 /* removing arrows for number inputs */
-.inputContainer>input::-webkit-outer-spin-button,
-.inputContainer>input::-webkit-inner-spin-button {
+.inputContainer > input::-webkit-outer-spin-button,
+.inputContainer > input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Firefox */
-.inputContainer>input[type="number"] {
+.inputContainer > input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
@@ -97,7 +96,7 @@
   position: relative !important;
 }
 
-.passwordWrapper>input {
+.passwordWrapper > input {
   background-color: transparent;
   border: none;
   outline: none;
@@ -105,8 +104,8 @@
 }
 
 /* Change the underline color on focus */
-.passwordWrapper>input:focus,
-.passwordWrapper>input:hover {
+.passwordWrapper > input:focus,
+.passwordWrapper > input:hover {
   border-bottom: 3px solid rgb(2, 65, 123);
 
   &::placeholder {

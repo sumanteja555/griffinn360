@@ -1,10 +1,20 @@
 import AdminBookings from "../../components/Admin/AdminBookings/AdminBookings";
-import AdminUser from "../../components/Admin/User/AdminUser";
+import AdminUser from "../../components/Admin/AdminUser/AdminUser";
 import AdminRootLayout from "./AdminRootLayout";
 import { Suspense } from "react";
 
+import AdminPrivateRoute from "./AdminPrivateRoute";
+
 const SuspenseWrapper = ({ children }) => {
   return <Suspense fallback={<h1>Loading...</h1>}>{children}</Suspense>;
+};
+
+const AdminPrivateRouteWrapper = ({ children }) => {
+  return (
+    <AdminPrivateRoute>
+      <Suspense fallback={<h1>Loading...</h1>}>{children}</Suspense>
+    </AdminPrivateRoute>
+  );
 };
 
 const AdminRoutes = {
@@ -15,16 +25,16 @@ const AdminRoutes = {
       index: true,
       element: (
         <SuspenseWrapper>
-          <AdminBookings />
+          <AdminUser />
         </SuspenseWrapper>
       ),
     },
     {
-      path: "adminuser",
+      path: "adminbookings",
       element: (
-        <SuspenseWrapper>
-          <AdminUser />
-        </SuspenseWrapper>
+        <AdminPrivateRouteWrapper>
+          <AdminBookings />
+        </AdminPrivateRouteWrapper>
       ),
     },
   ],

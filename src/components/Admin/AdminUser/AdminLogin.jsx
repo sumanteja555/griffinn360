@@ -30,7 +30,7 @@ const AdminLogin = ({
   const location = useLocation();
   const navigate = useNavigate();
   const isAdminLoggedIn = useSelector((state) => state.admin.isAdminLoggedIn);
-  const from = location.state?.from?.pathname || "/admin";
+  const from = location.state?.from?.pathname || "/";
 
   // backend url
   const backendURL = import.meta.env.VITE_BACKEND_URL;
@@ -57,11 +57,13 @@ const AdminLogin = ({
 
       if (response.data.success) {
         const token = response.data.token;
+        const adminId = response.data.adminId;
 
         // Dispatch the setUser action to store token and user info in Redux
         dispatch(
           adminActions.setUser({
             token: token,
+            adminId: adminId,
           })
         );
 
@@ -91,7 +93,7 @@ const AdminLogin = ({
   };
   return (
     <div className={styles.formContainer}>
-      <h1>Login</h1>
+      <h1>Admin Login</h1>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
           {loginDetails.map((input) => (

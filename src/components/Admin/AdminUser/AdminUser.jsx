@@ -31,7 +31,6 @@ const AdminUser = () => {
           handlePasswordInvisible={handlePasswordInvisible}
         />
       </div>
-      <h1>admin user</h1>
     </>
   );
 };
