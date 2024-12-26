@@ -13,6 +13,7 @@ const AdminVolunteers = () => {
 
   const observer = useRef();
   const isAdminLoggedIn = useSelector((state) => state.admin.isAdminLoggedIn);
+  const token = useSelector((state) => state.admin.adminToken);
   const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   // Fetch volunteers when the page number changes
@@ -24,6 +25,7 @@ const AdminVolunteers = () => {
     try {
       const response = await axios.get(`${backendURL}/volunteersFetching.php`, {
         params: { page, limit: 10 }, // Adjust limit as needed
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (response.data.status === "success") {

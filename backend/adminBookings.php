@@ -40,7 +40,6 @@ function verify_token($jwt, $secret_key) {
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
-    error_log("All Headers: " . print_r(getallheaders(), true));
 
     // Get the token from the Authorization header
     $auth_header = isset($_SERVER['HTTP_AUTHORIZATION']) ? $_SERVER['HTTP_AUTHORIZATION'] : '';
