@@ -70,7 +70,7 @@ function AdminNavbar() {
               className="nav-link"
               role="button"
               tabIndex="0"
-              to="/gallery"
+              to="/admin/adminvolunteers"
               onClick={handleSelect}
             >
               volunteers

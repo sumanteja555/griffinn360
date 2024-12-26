@@ -1,9 +1,21 @@
-import AdminBookings from "../../components/Admin/AdminBookings/AdminBookings";
-import AdminUser from "../../components/Admin/AdminUser/AdminUser";
-import AdminRootLayout from "./AdminRootLayout";
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 
-import AdminPrivateRoute from "./AdminPrivateRoute";
+// dynamic imports
+const AdminBookings = lazy(() =>
+  import("../../components/Admin/AdminBookings/AdminBookings")
+);
+
+const AdminVolunteers = lazy(() =>
+  import("../../components/Admin/AdminVolunteers/AdminVolunteers")
+);
+
+const AdminUser = lazy(() =>
+  import("../../components/Admin/AdminUser/AdminUser")
+);
+
+const AdminRootLayout = lazy(() => import("./AdminRootLayout"));
+
+const AdminPrivateRoute = lazy(() => import("./AdminPrivateRoute"));
 
 const SuspenseWrapper = ({ children }) => {
   return <Suspense fallback={<h1>Loading...</h1>}>{children}</Suspense>;
@@ -34,6 +46,14 @@ const AdminRoutes = {
       element: (
         <AdminPrivateRouteWrapper>
           <AdminBookings />
+        </AdminPrivateRouteWrapper>
+      ),
+    },
+    {
+      path: "adminvolunteers",
+      element: (
+        <AdminPrivateRouteWrapper>
+          <AdminVolunteers />
         </AdminPrivateRouteWrapper>
       ),
     },
