@@ -4,6 +4,7 @@ header("Access-Control-Allow-Origin: *");
 // header("Access-Control-Allow-Origin: https://griffinn360adventures.com");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
+date_default_timezone_set('UTC');
 
 $config = require __DIR__ . '/config.php'; // Load the config.php file
 

@@ -7,6 +7,7 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Include JWT library
 require_once '../vendor/autoload.php';
+date_default_timezone_set('UTC');
 
 $config= require __DIR__ . '/config.php'; // Load the config.php file
 

@@ -11,6 +11,8 @@ const AdminBookings = () => {
   const [page, setPage] = useState(1); // Track current page
   const [hasMore, setHasMore] = useState(true); // Track if there are more bookings
 
+  const token = useSelector((state) => state.admin.adminToken);
+
   const observer = useRef();
   const isAdminLoggedIn = useSelector((state) => state.admin.isAdminLoggedIn);
   const backendURL = import.meta.env.VITE_BACKEND_URL;
@@ -24,6 +26,7 @@ const AdminBookings = () => {
     try {
       const response = await axios.get(`${backendURL}/adminBookings.php`, {
         params: { page, limit: 10 }, // Adjust limit as needed
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (response.data.status === "success") {
