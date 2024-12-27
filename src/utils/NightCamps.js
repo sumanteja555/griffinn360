@@ -6,7 +6,7 @@ import five from "../assets/nightCamps/nightcampsfour.webp";
 
 const nightCamps = {
   title: "Night Camping",
-  price: "1700",
+  price: "1499",
   images: [
     {
       img: one,
