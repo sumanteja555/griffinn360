@@ -103,27 +103,6 @@ const UserRoutes = {
       ],
     },
     {
-      path: ":trekId",
-      children: [
-        {
-          index: true,
-          element: (
-            <SuspenseWrapper>
-              <TrekPage />
-            </SuspenseWrapper>
-          ),
-        },
-        {
-          path: ":eventId",
-          element: (
-            <SuspenseWrapper>
-              <EventPage />
-            </SuspenseWrapper>
-          ),
-        },
-      ],
-    },
-    {
       path: "booknow",
       element: (
         <PrivateRoute>

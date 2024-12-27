@@ -46,6 +46,7 @@ const isTokenExpired = (token) => {
   try {
     const decoded = jwtDecode(token);
     const currentTime = Math.floor(Date.now() / 1000); // Get current time in seconds
+
     return decoded.exp < currentTime; // Token is expired if exp < current time
   } catch (error) {
     return true; // If any error occurs during decoding, treat token as expired
@@ -94,7 +95,7 @@ const adminSlice = createSlice({
   name: "admin",
   initialState: intialAdminSlice,
   reducers: {
-    setUser(state, action) {
+    setAdmin(state, action) {
       const token = action.payload.token;
       const adminId = action.payload.adminId;
 
@@ -110,7 +111,7 @@ const adminSlice = createSlice({
         state.adminId = adminId;
       }
     },
-    clearUser(state) {
+    clearAdmin(state) {
       state.isAdminLoggedIn = false;
       state.adminToken = null;
       state.adminId = null;

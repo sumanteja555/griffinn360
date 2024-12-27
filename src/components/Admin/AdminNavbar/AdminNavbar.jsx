@@ -29,7 +29,7 @@ function AdminNavbar() {
 
   function handleLogout() {
     handleSelect();
-    dispatch(adminActions.clearUser());
+    dispatch(adminActions.clearAdmin());
     dispatch(
       snackbarActions.openBar({
         type: "info",

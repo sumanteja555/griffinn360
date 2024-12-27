@@ -60,7 +60,7 @@ const AdminLogin = ({
 
         // Dispatch the setUser action to store token and user info in Redux
         dispatch(
-          adminActions.setUser({
+          adminActions.setAdmin({
             token: token,
             adminId: adminId,
           })

@@ -31,7 +31,9 @@ const Login = ({
   const location = useLocation();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "";
+
+  console.log("from location is: " + from);
 
   // backend url
   const backendURL = import.meta.env.VITE_BACKEND_URL;
@@ -55,6 +57,10 @@ const Login = ({
       if (response.data.success) {
         const token = response.data.token;
 
+        console.log(
+          "user has been logged in and will be redirected to " + from
+        );
+
         // Dispatch the setUser action to store token and user info in Redux
         dispatch(
           userActions.setUser({
@@ -72,11 +78,6 @@ const Login = ({
         navigate(from, { replace: true });
       }
     } catch (error) {
-      // console.error(
-      //   "There was an error logging in:",
-      //   error.response.data.message
-      // );
-
       dispatch(
         snackbarActions.openBar({
           type: "error",
