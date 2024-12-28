@@ -16,7 +16,7 @@ const webLinks = {
       name: "about us",
     },
     {
-      address: "/adventureactivities",
+      address: "/adventurepark",
       name: "Adventurue Activites",
     },
     {
@@ -34,10 +34,6 @@ const webLinks = {
     {
       address: "/volunteer",
       name: "Volunteer",
-    },
-    {
-      address: "/policies",
-      name: "policies",
     },
   ],
 };
