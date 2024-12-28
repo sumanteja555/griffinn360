@@ -6,7 +6,7 @@ const HomePage = lazy(() => import("../components/Home/Home.jsx")); //home page 
 const AboutusPage = lazy(() => import("../components/AboutUs/AboutUs.jsx")); //about us page import
 const GallerPage = lazy(() => import("../components/Gallery/Gallery.jsx")); //gallery page import
 
-const NightscampsPage = lazy(() => import("./NightCamps.jsx")); //nightcamps page import
+const NightscampsPage = lazy(() => import("./NightCampPage.jsx")); //nightcamps page import
 const BooknowPage = lazy(() => import("../components/BookNow/BookNow.jsx")); //booknow component import
 const VolunteerPage = lazy(() =>
   import("../components/Volunteer/Volunteer.jsx")
@@ -38,6 +38,7 @@ const TermsConditions = lazy(() =>
 const ReleaseofLibality = lazy(() =>
   import("../components/Policies/ReleaseofLiability/ReleaseofLiability.jsx")
 );
+
 import PrivateRoute from "./PrivateRoute.jsx";
 
 const SuspenseWrapper = ({ children }) => {
@@ -171,7 +172,6 @@ const UserRoutes = {
         </SuspenseWrapper>
       ),
     },
-
     {
       path: "bookings",
       element: (
