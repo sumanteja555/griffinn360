@@ -1,60 +1,63 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import styles from "../components/UI/Aminity/Aminity.module.css";
+import axios from "axios";
 import { aminities } from "../utils/general";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
-
-// Lazy load the Event and Aminity components
+// Lazy load components
 const Event = lazy(() => import("../components/NightCamp/NightCamp"));
 const Aminity = lazy(() => import("../components/UI/Aminity/Aminitiy"));
 
-// Define the nightCamps data here or import if needed
-import nightCamps from "../utils/NightCamps";
-const NightCampsPage = () => {
-  const [campData, setCampData] = useState([]);
+// Custom hook for fetching data
+const useFetchData = (url) => {
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const backendURL = import.meta.env.VITE_BACKEND_URL;
-
   useEffect(() => {
-    // Fetch data from the PHP backend
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${backendURL}/nightCampDataFetching.php`
-        );
-        setCampData(response.data);
-        setLoading(false);
+        const response = await axios.get(url);
+        setData(response.data);
       } catch (err) {
         setError(err.message);
+      } finally {
         setLoading(false);
       }
     };
-
     fetchData();
-  }, []);
+  }, [url]);
+
+  return { data, loading, error };
+};
+
+const NightCampsPage = () => {
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
+  const {
+    data: campData,
+    loading,
+    error,
+  } = useFetchData(`${backendURL}/nightCampDataFetching.php`);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Fetching data {error}</p>;
+  if (error) return <p>Error fetching data: {error}</p>;
+  if (campData.length === 0)
+    return <p>No night camps available at the moment.</p>;
+
   return (
     <Suspense fallback={<h1>Loading...</h1>}>
       <>
-        {/* Render Event component with nightCamps data */}
-        <Event event={campData[0]} />
+        {/* Render all night camp events */}
+        {campData.map((event, index) => (
+          <Event key={index} event={event} />
+        ))}
 
         {/* Render Aminity section */}
         <div className={styles.aminityContainer}>
           <p className={styles.title}>AMENITIES</p>
           <div className={styles.logosContainer}>
             {aminities.map((aminity) => (
-              <Suspense
-                key={aminity.title}
-                fallback={<div>Loading amenity...</div>}
-              >
-                <Aminity aminity={aminity} />
-              </Suspense>
+              <Aminity key={aminity.title} aminity={aminity} />
             ))}
           </div>
         </div>
