@@ -33,8 +33,6 @@ const Login = ({
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const from = location.state?.from?.pathname || "";
 
-  console.log("from location is: " + from);
-
   // backend url
   const backendURL = import.meta.env.VITE_BACKEND_URL;
 
