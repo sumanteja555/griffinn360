@@ -7,7 +7,7 @@ import { cartActions } from "../../../store/store";
 export default function GridItem({ item }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { title, img, description, price, book } = item;
+  const { title, img, description, price, book, points } = item;
 
   function handleClick(name, price) {
     dispatch(cartActions.addToCart({ eventName: name, price: price }));
@@ -21,7 +21,18 @@ export default function GridItem({ item }) {
       </figure>
       <div className={styles.infoContainer}>
         <h2 className={styles.title}>{title}</h2>
-        <p className={styles.description}>{description}</p>
+        {/* <p className={styles.description}>{description}</p> */}
+        {points && (
+          <p className={styles.points}>
+            <ul>
+              {points.map((point, index) => (
+                <li className={styles.point} key={index}>
+                  {point}
+                </li>
+              ))}
+            </ul>{" "}
+          </p>
+        )}
         {price && <p className={styles.price}>Rs: {price}/-</p>}
 
         {book ? (
