@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $offset = ($page - 1) * $limit;
 
     // Prepare the SQL query to fetch bookings with pagination
-    $sql = "SELECT * FROM bookings LIMIT ? OFFSET ?";
+    $sql = "SELECT * FROM bookings ORDER BY created_at DESC LIMIT ? OFFSET ?";
     
     if ($stmt = $conn->prepare($sql)) {
         // Ensure $limit and $offset are integers

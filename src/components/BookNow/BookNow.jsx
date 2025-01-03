@@ -52,7 +52,12 @@ export default function BookNow() {
       const data = await response.json();
       return data;
     } catch (error) {
-      // console.error("Error creating order:", error);
+      dispatch(
+        snackbarActions.openBar({
+          type: "warning",
+          message: "Payment failed. Please try again",
+        })
+      );
     }
   }
 
@@ -100,7 +105,15 @@ export default function BookNow() {
         body: JSON.stringify(bookingData),
       });
       const data = response.json();
-    } catch (error) {}
+    } catch (error) {
+      dispatch(
+        snackbarActions.openBar({
+          type: "warning",
+          message:
+            "Unable to update booking details. Please contact Administrator",
+        })
+      );
+    }
   };
   // handling form submit
   const handleSubmit = async (e) => {
