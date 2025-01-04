@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mobile_number = $_GET['number']; // Assuming the user_id is passed in the GET request
 
     // Prepare the SQL query to fetch bookings
-    $sql = "SELECT id, name, mobile_number, email, persons, travel_date, event_name, amount, payment_id, order_id FROM bookings ORDER BY created_at DESC WHERE mobile_number = ?";
+    $sql = "SELECT * FROM bookings WHERE mobile_number = ? ORDER BY created_at DESC";
     
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("i", $mobile_number);
