@@ -34,8 +34,6 @@ const Bookings = () => {
     }
   }, [userNumber]);
 
-  console.log(bookings);
-
   return (
     <section className={styles.container}>
       <h2 className={styles.heading}>My Bookings</h2>

@@ -75,6 +75,15 @@ function AdminNavbar() {
             >
               volunteers
             </NavLink>
+            <NavLink
+              className="nav-link"
+              role="button"
+              tabIndex="0"
+              to="/admin/adventureparkupdate"
+              onClick={handleSelect}
+            >
+              Park
+            </NavLink>
 
             {isAdminLoggedIn ? (
               <NavLink to="/admin" className="nav-link" onClick={handleLogout}>

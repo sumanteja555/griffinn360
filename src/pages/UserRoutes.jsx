@@ -39,6 +39,8 @@ const ReleaseofLibality = lazy(() =>
   import("../components/Policies/ReleaseofLiability/ReleaseofLiability.jsx")
 );
 
+const AdventurePark = lazy(() => import("../pages/AdventurePark.jsx")); //adventure park page import
+
 import PrivateRoute from "./PrivateRoute.jsx";
 
 const SuspenseWrapper = ({ children }) => {
@@ -79,6 +81,14 @@ const UserRoutes = {
       element: (
         <SuspenseWrapper>
           <NightscampsPage />
+        </SuspenseWrapper>
+      ),
+    },
+    {
+      path: "adventurepark",
+      element: (
+        <SuspenseWrapper>
+          <AdventurePark />
         </SuspenseWrapper>
       ),
     },

@@ -28,6 +28,7 @@
   margin: 0;
   padding: 0 5%;
   align-items: center;
+  padding-bottom: 1rem;
 }
 .imgContainer {
   width: 100%;
