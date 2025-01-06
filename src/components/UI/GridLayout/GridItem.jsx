@@ -4,10 +4,10 @@ import { useDispatch } from "react-redux";
 
 import { cartActions } from "../../../store/store";
 
-export default function GridItem({ item }) {
+export default function GridItem({ item, heading }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { title, img, description, price, book, points } = item;
+  const { title, img, price, book, points } = item;
 
   function handleClick(name, price) {
     dispatch(cartActions.addToCart({ eventName: name, price: price }));
@@ -17,7 +17,16 @@ export default function GridItem({ item }) {
   return (
     <div className={styles.itemContainer}>
       <figure className={styles.imgContainer}>
-        <img src={img} alt={title} className={styles.img} loading="lazy" />
+        <img
+          src={
+            heading == "adventure Park"
+              ? `http://www.griffinn360adventures.com/uploads/${img}`
+              : img
+          }
+          alt={title}
+          className={styles.img}
+          loading="lazy"
+        />
       </figure>
       <div className={styles.infoContainer}>
         <h2 className={styles.title}>{title}</h2>

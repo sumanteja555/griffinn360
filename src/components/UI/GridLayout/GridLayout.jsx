@@ -18,7 +18,7 @@ export default function GridLayout({ gridItems }) {
       ) : null}
       <div className={styles.gridItemsContainer}>
         {gridData.map((item) => {
-          return <GridItem item={item} key={item.title} />;
+          return <GridItem item={item} key={item.title} heading={heading} />;
         })}
       </div>
     </section>
