@@ -55,10 +55,6 @@ const Login = ({
       if (response.data.success) {
         const token = response.data.token;
 
-        console.log(
-          "user has been logged in and will be redirected to " + from
-        );
-
         // Dispatch the setUser action to store token and user info in Redux
         dispatch(
           userActions.setUser({

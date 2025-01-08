@@ -7,10 +7,12 @@ import { cartActions } from "../../../store/store";
 export default function GridItem({ item, heading }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { title, img, price, book, points } = item;
+  const { title, img, price, book, points, discount } = item;
 
-  function handleClick(name, price) {
-    dispatch(cartActions.addToCart({ eventName: name, price: price }));
+  function handleClick(name, price, discount) {
+    const newPrice =
+      discount !== "0" ? Math.floor(price - (price * discount) / 100) : price;
+    dispatch(cartActions.addToCart({ eventName: name, price: newPrice }));
     navigate("/booknow");
   }
 
@@ -39,8 +41,11 @@ export default function GridItem({ item, heading }) {
                   {point}
                 </li>
               ))}
-            </ul>{" "}
+            </ul>
           </p>
+        )}
+        {discount !== "0" && (
+          <p className={styles.discount}>Discount: {discount}%</p>
         )}
         {price && <p className={styles.price}>Rs: {price}/-</p>}
 
@@ -48,7 +53,7 @@ export default function GridItem({ item, heading }) {
           <button
             className={styles.btn}
             onClick={() => {
-              handleClick(title, price);
+              handleClick(title, price, discount);
             }}
           >
             Book Now
