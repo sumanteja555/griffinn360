@@ -22,7 +22,14 @@ const AdventureParkUpdate = () => {
           `${backendURL}/adventureParkFetch.php`
         ); // Replace with your API endpoint
 
-        setActivities(response.data.data);
+        const parsedData = response.data.data.map((activity) => ({
+          ...activity,
+          points:
+            typeof activity.points === "string"
+              ? JSON.parse(activity.points)
+              : activity.points,
+        }));
+        setActivities(parsedData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -38,7 +45,7 @@ const AdventureParkUpdate = () => {
 
     setFormData({
       price: activity?.price || "",
-      points: activity?.points ? JSON.stringify(activity.points, null, 2) : "",
+      points: activity?.points?.join(", ") || "",
       discount: activity?.discount || "",
     });
   };
