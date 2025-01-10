@@ -14,6 +14,10 @@ const routes = [
     name: "Adventure Park Update",
     path: "/admin/adventureparkupdate",
   },
+  {
+    name: "Night Camp Update",
+    path: "/admin/nightcampupdate",
+  },
 ];
 
 const AdminHome = () => {

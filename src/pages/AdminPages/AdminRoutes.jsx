@@ -22,6 +22,10 @@ const AdventureParkUpdate = lazy(() =>
   import("../../components/Admin/AdventureParkUpdate/AdventureParkUpdate")
 );
 
+const NightCampUpdate = lazy(() =>
+  import("../../components/Admin/NightCampUpdate/NightCampUpdate")
+);
+
 const SuspenseWrapper = ({ children }) => {
   return <Suspense fallback={<h1>Loading...</h1>}>{children}</Suspense>;
 };
@@ -75,6 +79,14 @@ const AdminRoutes = {
       element: (
         <AdminPrivateRouteWrapper>
           <AdventureParkUpdate />
+        </AdminPrivateRouteWrapper>
+      ),
+    },
+    {
+      path: "nightcampupdate",
+      element: (
+        <AdminPrivateRouteWrapper>
+          <NightCampUpdate />
         </AdminPrivateRouteWrapper>
       ),
     },

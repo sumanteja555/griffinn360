@@ -22,11 +22,14 @@ const NightCamp = ({ event }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { images, inclusions, exclusions, itinerary, title, price } = event;
+  const { images, inclusions, exclusions, itinerary, title, price, discount } =
+    event;
 
   // Add to cart function
   const handleAddToCart = () => {
-    dispatch(cartActions.addToCart({ eventName: title, price }));
+    const newPrice =
+      discount !== "0" ? Math.floor(price - (price * discount) / 100) : price;
+    dispatch(cartActions.addToCart({ eventName: title, price: newPrice }));
     navigate("/booknow");
   };
 
@@ -63,6 +66,20 @@ const NightCamp = ({ event }) => {
             items={JSON.parse(exclusions)}
             className={styles.exclusions}
           />
+        )}
+      </div>
+
+      <div className={styles.priceContainer}>
+        <div className={styles.price}>
+          <p>price: </p>
+          {price} /- per person
+        </div>
+
+        {discount !== "0" && (
+          <div className={styles.discount}>
+            <p>Discount: </p>
+            {discount} %
+          </div>
         )}
       </div>
 
