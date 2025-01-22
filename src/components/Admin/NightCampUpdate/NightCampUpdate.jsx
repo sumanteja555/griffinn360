@@ -32,18 +32,17 @@ const NightCampUpdate = () => {
     const updatedFormData = [...formData];
 
     if (field === "price" || field === "discount") {
-      // Ensure numeric fields remain valid
-      updatedFormData[index][field] = parseFloat(value) || 0;
-    } else if (["inclusions", "exclusions", "itinerary"].includes(field)) {
+      // Parse as float but ensure no unexpected rounding
+
+      const parsedValue = parseFloat(value);
+      updatedFormData[index][field] = isNaN(parsedValue) ? 0 : parsedValue;
+    } else {
       try {
-        // Parse JSON fields into arrays
         updatedFormData[index][field] = JSON.parse(value);
       } catch (e) {
-        console.error(`Invalid JSON for field "${field}":`, e);
-        updatedFormData[index][field] = []; // Default to empty array if parsing fails
+        console.error("Invalid JSON format. Storing as a string:", e);
+        updatedFormData[index][field] = value; // Keep as a string if parsing fails
       }
-    } else {
-      updatedFormData[index][field] = value; // For other fields
     }
 
     setFormData(updatedFormData);
@@ -53,36 +52,24 @@ const NightCampUpdate = () => {
     try {
       setLoading(true);
 
-      // Prepare and validate the payload
-      const payload = formData.map((item) => {
-        const validatedItem = {
-          id: String(item.id || ""), // Ensure id is a string
-          title: item.title?.trim() || "", // Ensure title is non-empty
-          price: parseFloat(item.price) || 0, // Ensure price is a valid number
-          inclusions: Array.isArray(item.inclusions) ? item.inclusions : [],
-          exclusions: Array.isArray(item.exclusions) ? item.exclusions : [],
-          itinerary: Array.isArray(item.itinerary)
-            ? item.itinerary.map((day) => ({
-                day: day.day || "", // Validate day field
-                details: Array.isArray(day.details) ? day.details : [],
-                text: day.text || "",
-              }))
-            : [],
-          discount: parseFloat(item.discount) || 0, // Ensure discount is a valid number
-        };
+      const payload = formData.map((item) => ({
+        id: String(item.id || ""), // Ensure id is a string
+        title: item.title?.trim() || "", // Ensure title is non-empty
+        price: parseFloat(item.price || 0), // Keep price as a float without formatting it to a string
+        inclusions: Array.isArray(item.inclusions) ? item.inclusions : [],
+        exclusions: Array.isArray(item.exclusions) ? item.exclusions : [],
+        itinerary: Array.isArray(item.itinerary)
+          ? item.itinerary.map((day) => ({
+              day: day.day || "",
+              details: Array.isArray(day.details) ? day.details : [],
+              text: day.text || "",
+            }))
+          : [],
+        discount: parseFloat(item.discount || 0), // Keep discount as a float without formatting
+      }));
 
-        // Basic validation for required fields
-        if (!validatedItem.title || isNaN(validatedItem.price)) {
-          throw new Error("Invalid or missing fields in payload.");
-        }
+      // console.log("Payload being sent:", JSON.stringify(payload[0], null, 2));
 
-        return validatedItem;
-      });
-
-      // Log the payload for debugging
-      console.log("Payload being sent:", JSON.stringify(payload[0], null, 2));
-
-      // Send the request
       const response = await axios.put(
         `${backendURL}/nightCampUpdate.php`,
         payload[0],
@@ -93,7 +80,6 @@ const NightCampUpdate = () => {
         }
       );
 
-      console.log("Server response:", response);
       alert(response.data.message || "Data updated successfully!");
       setError(""); // Clear any previous errors
     } catch (err) {
@@ -134,6 +120,7 @@ const NightCampUpdate = () => {
               onChange={(e) =>
                 handleInputChange(index, "price", e.target.value)
               }
+              onWheel={(e) => e.target.blur()} // Prevent scroll changes
             />
           </div>
 
@@ -180,6 +167,7 @@ const NightCampUpdate = () => {
               onChange={(e) =>
                 handleInputChange(index, "discount", e.target.value)
               }
+              onWheel={(e) => e.target.blur()} // Prevent scroll changes
             />
           </div>
         </div>
