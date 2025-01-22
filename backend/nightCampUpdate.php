@@ -1,6 +1,5 @@
 <?php
 
-header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
@@ -44,56 +43,67 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
 // Update nightcamping data
 if ($_SERVER["REQUEST_METHOD"] === "PUT") {
+    // Read input data
     $input = json_decode(file_get_contents('php://input'), true);
 
-    // Debug input received
-    error_log("Received PUT data: " . print_r($input, true));
+    // Validate input fields
+    if (empty($input)) {
+        echo json_encode(["status" => "error", "message" => "No data received."]);
+        exit();
+    }   
+    if (
+        empty($input['id']) ||
+        empty($input['title']) ||
+        !is_numeric($input['price']) ||
+        !is_array($input['inclusions']) ||
+        !is_array($input['exclusions']) ||
+        !is_array($input['itinerary']) ||
+        !is_numeric($input['discount'])
+    ) {
+        echo json_encode(["status" => "error", "message" => "Invalid or missing fields."]);
+        exit();
+    }
+    
 
-    if (!isset($input) || !is_array($input)) {
-        echo json_encode(["status" => "error", "message" => "Invalid input data."]);
+    // Sanitize and prepare data
+    $id = (int)$input['id'];  // Ensuring id is an integer
+    $title = $input['title'];
+    $price = is_numeric($input['price']) ? (float)$input['price'] : 0.0;  // Ensure price is a float
+    $inclusions = json_encode($input['inclusions']);
+    $exclusions = json_encode($input['exclusions']);
+    $itinerary = json_encode($input['itinerary']);
+    $discount = is_numeric($input['discount']) ? (float)$input['discount'] : 0.0;  // Ensure discount is a float
+
+    // Validate discount (it must be a positive number)
+    if (is_nan($discount) || $discount < 0) {
+        echo json_encode(["status" => "error", "message" => "Invalid discount value."]);
         exit();
     }
 
-    foreach ($input as $item) {
-        if (!isset($item['id'], $item['title'], $item['price'], $item['inclusions'], $item['exclusions'], $item['itinerary'], $item['discount'])) {
-            echo json_encode(["status" => "error", "message" => "Missing required fields."]);
-            exit();
-        }
+    // Prepare SQL query
+    $sql = "UPDATE nightcamping SET title = ?, price = ?, inclusions = ?, exclusions = ?, itinerary = ?, discount = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
 
-        $id = (int)$item['id'];
-        $title = $item['title'];
-        $price = (float)$item['price'];
-        $inclusions = json_encode($item['inclusions']);
-        $exclusions = json_encode($item['exclusions']);
-        $itinerary = json_encode($item['itinerary']);
-        $discount = (int)$item['discount'];
+    if ($stmt) {
+        // Bind parameters to the SQL query
+        $stmt->bind_param("sdsssdi", $title, $price, $inclusions, $exclusions, $itinerary, $discount, $id);
 
-        $sql = "UPDATE nightcamping 
-                SET title = ?, price = ?, inclusions = ?, exclusions = ?, itinerary = ?, discount = ? 
-                WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-
-        if ($stmt) {
-            $stmt->bind_param("sdsdssii", $title, $price, $inclusions, $exclusions, $itinerary, $discount, $id);
-            if ($stmt->execute()) {
-                // Log success for each item
-                error_log("Updated ID: $id successfully.");
-            } else {
-                error_log("Failed to update ID: $id.");
-            }
-            $stmt->close();
+        // Execute the query
+        if ($stmt->execute()) {
+            echo json_encode(["status" => "success", "message" => "Nightcamp updated successfully."]);
         } else {
-            error_log("Error preparing SQL for ID: $id.");
+            echo json_encode(["status" => "error", "message" => "Failed to update Nightcamp: " . $stmt->error]);
         }
+        $stmt->close();
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error preparing the SQL statement: " . $conn->error]);
     }
-
-    echo json_encode(["status" => "success", "message" => "Data updated successfully."]);
-    exit();
 }
 
-
-// Handle unsupported methods
-echo json_encode(["status" => "error", "message" => "Unsupported request method."]);
+else {
+    // Handle unsupported methods
+    echo json_encode(["status" => "error", "message" => "Unsupported request method."]);
+}   
 
 // Close connection
 $conn->close();

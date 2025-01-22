@@ -48,8 +48,10 @@ function AdminNavbar() {
       expanded={expanded}
     >
       <Container>
-        <Navbar.Brand to="/admin">
-          <h1 className={styles.adminId}>{adminId}</h1>
+        <Navbar.Brand>
+          <NavLink to="/admin" className={styles.adminId}>
+            <h1>{adminId}</h1>
+          </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"

@@ -1,0 +1,36 @@
+# Enable Rewrite Engine and Preserve Authorization Header
+
+RewriteEngine On
+RewriteCond %{HTTP:Authorization} ^(._)
+RewriteRule ^(._) - [E=HTTP_AUTHORIZATION:%1]
+
+
+# Block direct access to PHP files from external users
+
+<FilesMatch "\.php$">
+Require all denied
+</FilesMatch>
+
+
+# Allow access from your own domain
+
+<If "%{HTTP_REFERER} =~ m#^https?://(www\.)?griffinn360adventures\.com/#">
+Require all granted
+</If>
+
+# Allow access from the server's IP address
+
+# Enable CORS for API requests
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "https://griffinn360adventures.com"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# Allow OPTIONS requests to be processed correctly
+
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^(.*)$ $1 [R=200,L]
+</IfModule> -->

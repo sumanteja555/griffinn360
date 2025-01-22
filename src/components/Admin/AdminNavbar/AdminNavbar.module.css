@@ -7,4 +7,6 @@
 .adminId {
   text-transform: uppercase;
   letter-spacing: 0.5ch;
+  color: initial;
+  text-decoration: initial;
 }
