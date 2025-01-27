@@ -68,7 +68,7 @@ const NightCampUpdate = () => {
         discount: parseFloat(item.discount || 0), // Keep discount as a float without formatting
       }));
 
-      // console.log("Payload being sent:", JSON.stringify(payload[0], null, 2));
+      console.log("Payload being sent:", JSON.stringify(payload[0], null, 2));
 
       const response = await axios.put(
         `${backendURL}/nightCampUpdate.php`,

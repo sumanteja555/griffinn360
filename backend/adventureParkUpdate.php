@@ -1,10 +1,9 @@
 <?php
 
-header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 // Database configuration
 $config = require __DIR__ . '/config.php';
@@ -18,31 +17,37 @@ $conn = new mysqli($servername, $username, $dbpassword, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
+    error_log("Connection failed: " . $conn->connect_error);
     die(json_encode(["status" => "error", "message" => "Connection failed: " . $conn->connect_error]));
 }
 
-// Fetch activities
-if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    $sql = "SELECT id, title, price, points, discount FROM adventure_park";
-    $result = $conn->query($sql);
+// Define the path to the uploads directory
+$uploadsDir = realpath(__DIR__ . '/../uploads/adventureActivities/'); // Adjust this path if necessary
 
-    if ($result->num_rows > 0) {
-        $activities = [];
-        while ($row = $result->fetch_assoc()) {
-            $row['points'] = json_decode($row['points'], true); // Decode JSON points
-            $activities[] = $row;
-        }
-        echo json_encode(["status" => "success", "data" => $activities]);
-    } else {
-        echo json_encode(["status" => "success", "data" => [], "message" => "No activities found."]);
-    }
-    exit();
+// Handle OPTIONS request for CORS preflight
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+    exit(); // Stop further processing
 }
 
-// Update an activity
+// Content-Type should be JSON for responses
+header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// Handle PUT request
 if ($_SERVER["REQUEST_METHOD"] === "PUT") {
     $input = json_decode(file_get_contents('php://input'), true);
+    
+    if ($input === null) {
+        echo json_encode(["status" => "error", "message" => "Invalid JSON data."]);
+        exit();
+    }
 
+    // Check for required fields in the input
     if (!isset($input['id'], $input['price'], $input['points'], $input['discount'])) {
         echo json_encode(["status" => "error", "message" => "Missing required fields."]);
         exit();
@@ -53,11 +58,65 @@ if ($_SERVER["REQUEST_METHOD"] === "PUT") {
     $points = json_encode($input['points']);
     $discount = (float)$input['discount'];
 
-    $sql = "UPDATE adventure_park SET price = ?, points = ?, discount = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
+    // Initialize $imgPath
+    $imgPath = null;
 
+    // Retrieve existing image path from the database
+    $sql = "SELECT img FROM adventure_park WHERE id = ?";
+    $stmt = $conn->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param("dsdi", $price, $points, $discount, $id);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->bind_result($existingImgPath);
+        if ($stmt->fetch()) {
+            $existingImgPath = $existingImgPath ?? null;
+        }
+        $stmt->close();
+    }
+
+    // Handle image upload
+    if (isset($input['image']) && !empty($input['image'])) {
+        $imageData = $input['image'];
+
+        // Validate and decode Base64 image data
+        if (preg_match('/^data:image\/webp;base64,/', $imageData)) {
+            // Remove the Base64 header
+            $imageData = substr($imageData, strpos($imageData, ',') + 1);
+            $decodedImage = base64_decode($imageData);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Invalid image type. Only WebP is supported."]);
+            exit();
+        }
+
+        // Generate a new file name or reuse the existing file name
+        if (!empty($existingImgPath)) {
+            $fileName = basename($existingImgPath);
+        } else {
+            $fileName = uniqid() . '.webp';
+        }
+
+        // Ensure the directory exists
+        if (!is_dir($uploadsDir)) {
+            mkdir($uploadsDir, 0755, true);
+        }
+
+        $filePath = $uploadsDir . DIRECTORY_SEPARATOR . $fileName;
+        $imgPath = '/uploads/adventureActivities/' . $fileName;
+
+        // Save the image to the server
+        if (file_put_contents($filePath, $decodedImage) === false) {
+            echo json_encode(["status" => "error", "message" => "Failed to save image file."]);
+            exit();
+        }
+    } else {
+        $imgPath = $existingImgPath; // Keep the existing image path if no new image is provided
+    }
+
+    // Update activity details in the database
+    $sql = "UPDATE adventure_park SET price = ?, points = ?, discount = ?, img = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param("dsdsi", $price, $points, $discount, $imgPath, $id);
         if ($stmt->execute()) {
             echo json_encode(["status" => "success", "message" => "Activity updated successfully."]);
         } else {
@@ -65,15 +124,15 @@ if ($_SERVER["REQUEST_METHOD"] === "PUT") {
         }
         $stmt->close();
     } else {
-        echo json_encode(["status" => "error", "message" => "Error preparing the SQL statement."]);
+        echo json_encode(["status" => "error", "message" => "Failed to prepare SQL statement."]);
     }
+
     exit();
 }
 
 // Handle unsupported methods
 echo json_encode(["status" => "error", "message" => "Unsupported request method."]);
 
-// Close connection
+// Close database connection
 $conn->close();
-
 ?>

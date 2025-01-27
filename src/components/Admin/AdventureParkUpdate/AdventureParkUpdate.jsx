@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import styles from "./AdventureParkUpdate.module.css";
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
@@ -13,6 +12,8 @@ const AdventureParkUpdate = () => {
     points: "",
     discount: "",
   });
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   // Fetch data from the backend
   useEffect(() => {
@@ -20,7 +21,8 @@ const AdventureParkUpdate = () => {
       try {
         const response = await axios.get(
           `${backendURL}/adventureParkFetch.php`
-        ); // Replace with your API endpoint
+        );
+        console.log("Data fetched:", response.data.data);
 
         const parsedData = response.data.data.map((activity) => ({
           ...activity,
@@ -48,6 +50,15 @@ const AdventureParkUpdate = () => {
       points: activity?.points?.join(", ") || "",
       discount: activity?.discount || "",
     });
+
+    // Normalize the image path
+    const normalizedPath = activity.img.replace(
+      /^[\\\/]?src[\\\/]assets[\\\/]adventureActivities[\\\/]/,
+      "/uploads/adventureActivities/"
+    );
+
+    // Set the image preview
+    setImagePreview(normalizedPath);
   };
 
   // Handle form input changes
@@ -56,17 +67,72 @@ const AdventureParkUpdate = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // Handle image change (file selection)
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validate WebP image
+      if (file.type !== "image/webp") {
+        alert("Only WebP images are allowed.");
+        return;
+      }
+
+      setImageFile(file);
+      const previewURL = URL.createObjectURL(file);
+      setImagePreview(previewURL); // Set image preview
+    }
+  };
+
+  // Utility function to read file as Data URL (Base64)
+  const readFileAsDataURL = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        resolve(reader.result); // This will be the Base64 string
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
   // Handle form submission (editing)
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Basic validation
+    if (!formData.price || !formData.discount) {
+      alert("Price and Discount are required fields.");
+      return;
+    }
+
+    // Prepare data payload
     const payload = {
-      id: selectedActivity.id,
+      id: selectedActivity?.id,
       price: formData.price,
-      points: formData.points.split(",").map((point) => point.trim()),
+      points: formData.points
+        ? formData.points.split(",").map((point) => point.trim())
+        : [],
       discount: formData.discount,
+      image: null, // Will be set if imageFile is present
     };
 
+    // If an image is selected, read it as Base64
+    if (imageFile) {
+      try {
+        const base64Image = await readFileAsDataURL(imageFile);
+        payload.image = base64Image;
+      } catch (error) {
+        console.error("Error reading image file:", error);
+        alert("Error reading image file.");
+        return;
+      }
+    }
+
+    console.log("Payload to send:", payload);
+
     try {
+      console.log("Sending PUT request to the backend...");
+
       const response = await fetch(`${backendURL}/adventureParkUpdate.php`, {
         method: "PUT",
         headers: {
@@ -75,21 +141,16 @@ const AdventureParkUpdate = () => {
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(
-          `HTTP error! Status: ${response.status} - ${errorText}`
-        );
-      }
-
       const data = await response.json();
+      console.log("Response:", data);
+
       if (data.status === "success") {
         alert(data.message);
       } else {
         alert(`Error: ${data.message}`);
       }
     } catch (err) {
-      console.error("Error updating activity:", err);
+      console.error("Error updating activity:", err.message);
       alert(`Error: ${err.message}`);
     }
   };
@@ -105,19 +166,26 @@ const AdventureParkUpdate = () => {
           onChange={(e) => handleSelection(e.target.value)}
         >
           <option value="">--Select an Activity--</option>
-          {activities.map((activity) => {
-            return (
-              <option key={activity.id} value={activity.id}>
-                {activity.title}
-              </option>
-            );
-          })}
+          {activities.map((activity) => (
+            <option key={activity.id} value={activity.id}>
+              {activity.title}
+            </option>
+          ))}
         </select>
       </div>
 
       {selectedActivity && (
         <div className={styles.activityDetails}>
           <h2>Activity Details</h2>
+          {imagePreview && (
+            <div className={styles.imageContainer}>
+              <img
+                src={imagePreview}
+                alt="Activity"
+                className={styles.previewImage}
+              />
+            </div>
+          )}
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="price">Price:</label>
@@ -130,7 +198,7 @@ const AdventureParkUpdate = () => {
               />
             </div>
             <div className={styles.inputContainer}>
-              <label htmlFor="points">Points (JSON):</label>
+              <label htmlFor="points">Points (comma-separated):</label>
               <textarea
                 id="points"
                 name="points"
@@ -150,6 +218,18 @@ const AdventureParkUpdate = () => {
                 onChange={handleChange}
               />
             </div>
+
+            <div className={styles.inputContainer}>
+              <label htmlFor="image">Choose Image (WebP only):</label>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/webp"
+                onChange={handleImageChange}
+              />
+            </div>
+
             <button type="submit" className={styles.btn}>
               Save Changes
             </button>

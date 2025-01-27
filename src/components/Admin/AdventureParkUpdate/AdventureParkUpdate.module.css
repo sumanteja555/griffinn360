@@ -77,6 +77,21 @@ select::-ms-expand {
   margin-top: 1rem;
 }
 
+.imageContainer {
+  max-width: 50%;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.previewImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
 /* CSS */
 .btn {
   align-items: center;
@@ -109,4 +124,10 @@ select::-ms-expand {
 
 .btn:hover {
   box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+}
+
+@media screen and (max-width: 576px) {
+  .imageContainer {
+    max-width: 80%;
+  }
 }

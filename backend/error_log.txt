@@ -1,0 +1,27 @@
+[27-Jan-2025 17:48:58 Europe/Berlin] PHP Warning:  mkdir(): Invalid path in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 124
+[27-Jan-2025 17:50:23 Europe/Berlin] PHP Warning:  mkdir(): Invalid path in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 124
+[27-Jan-2025 17:51:04 Europe/Berlin] PHP Warning:  mkdir(): Invalid path in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 124
+[27-Jan-2025 17:53:11 Europe/Berlin] PHP Warning:  mkdir(): Invalid path in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 124
+[27-Jan-2025 17:53:11 Europe/Berlin] Failed to create directory: 
+[27-Jan-2025 17:53:39 Europe/Berlin] PHP Warning:  mkdir(): Invalid path in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 124
+[27-Jan-2025 17:53:39 Europe/Berlin] Failed to create directory: 
+[27-Jan-2025 17:56:40 Europe/Berlin] Image data received: data:image/webp;base64,UklGRu5OAgBXRUJQVlA4IOJOAgAwegudASqwBEAGPp1Kn0smJ6ckpdILQLATiWdt4u/DO+Y9ff8mA
+[27-Jan-2025 17:57:16 Europe/Berlin] Image data received: data:image/webp;base64,UklGRu5OAgBXRUJQVlA4IOJOAgAwegudASqwBEAGPp1Kn0smJ6ckpdILQLATiWdt4u/DO+Y9ff8mA
+[27-Jan-2025 17:57:16 Europe/Berlin] PHP Warning:  mkdir(): Invalid path in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 134
+[27-Jan-2025 17:57:16 Europe/Berlin] Failed to create directory: 
+[27-Jan-2025 17:59:42 Europe/Berlin] Image data received: data:image/webp;base64,UklGRu5OAgBXRUJQVlA4IOJOAgAwegudASqwBEAGPp1Kn0smJ6ckpdILQLATiWdt4u/DO+Y9ff8mA
+[27-Jan-2025 17:59:42 Europe/Berlin] PHP Warning:  mkdir(): Invalid path in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 135
+[27-Jan-2025 17:59:42 Europe/Berlin] Failed to create directory: 
+[27-Jan-2025 18:01:20 Europe/Berlin] Image data received: data:image/webp;base64,/9j/4AAQSkZJRgABAQEAYABgAAD//gA+Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgS
+[27-Jan-2025 18:01:20 Europe/Berlin] PHP Warning:  mkdir(): Invalid path in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 135
+[27-Jan-2025 18:01:20 Europe/Berlin] Failed to create directory: 
+[27-Jan-2025 18:02:03 Europe/Berlin] Image data received: data:image/webp;base64,UklGRu5OAgBXRUJQVlA4IOJOAgAwegudASqwBEAGPp1Kn0smJ6ckpdILQLATiWdt4u/DO+Y9ff8mA
+[27-Jan-2025 18:02:03 Europe/Berlin] PHP Warning:  mkdir(): Invalid path in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 135
+[27-Jan-2025 18:02:03 Europe/Berlin] Failed to create directory: 
+[27-Jan-2025 18:03:14 Europe/Berlin] Image data received: data:image/webp;base64,UklGRu5OAgBXRUJQVlA4IOJOAgAwegudASqwBEAGPp1Kn0smJ6ckpdILQLATiWdt4u/DO+Y9ff8mA
+[27-Jan-2025 18:03:14 Europe/Berlin] PHP Warning:  mkdir(): Invalid path in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 135
+[27-Jan-2025 18:03:14 Europe/Berlin] Failed to create directory: 
+[27-Jan-2025 18:03:27 Europe/Berlin] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 42
+[27-Jan-2025 18:03:27 Europe/Berlin] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 42
+[27-Jan-2025 18:03:27 Europe/Berlin] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 42
+[27-Jan-2025 18:03:27 Europe/Berlin] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in D:\xampp_projects\griffinn360adventures\backend\adventureParkUpdate.php on line 42

@@ -1,8 +1,9 @@
 # Enable Rewrite Engine and Preserve Authorization Header
 
 RewriteEngine On
-RewriteCond %{HTTP:Authorization} ^(._)
-RewriteRule ^(._) - [E=HTTP_AUTHORIZATION:%1]
+RewriteCond %{HTTP:Authorization} .
+RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
 
 
 # Block direct access to PHP files from external users
