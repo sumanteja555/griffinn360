@@ -23,7 +23,7 @@ const AdventureParkUpdate = () => {
         const response = await axios.get(
           `${backendURL}/adventureParkFetch.php`
         );
-        console.log("Data fetched:", response.data.data);
+        // console.log("Data fetched:", response.data.data);
 
         const parsedData = response.data.data.map((activity) => ({
           ...activity,
@@ -56,10 +56,6 @@ const AdventureParkUpdate = () => {
       /^[\\\/]?src[\\\/]assets[\\\/]adventureActivities[\\\/]/,
       "uploads/adventureActivities/"
     );
-
-    console.log("normalizedPath is:", normalizedPath);
-    const fullImagePath = `${imageUrl}${normalizedPath}`;
-    console.log("full image path is:", fullImagePath);
     // Set the image preview
     setImagePreview(normalizedPath);
   };
@@ -82,7 +78,7 @@ const AdventureParkUpdate = () => {
 
       setImageFile(file);
       const previewURL = URL.createObjectURL(file);
-      console.log("Preview URL:", previewURL);
+      // console.log("Preview URL:", previewURL);
 
       setImagePreview(previewURL); // Set image preview
     }
@@ -133,10 +129,10 @@ const AdventureParkUpdate = () => {
       }
     }
 
-    console.log("Payload to send:", payload);
+    // console.log("Payload to send:", payload);
 
     try {
-      console.log("Sending PUT request to the backend...");
+      // console.log("Sending PUT request to the backend...");
 
       const response = await fetch(`${backendURL}/adventureParkUpdate.php`, {
         method: "PUT",
@@ -147,7 +143,7 @@ const AdventureParkUpdate = () => {
       });
 
       const data = await response.json();
-      console.log("Response:", data);
+      // console.log("Response:", data);
 
       if (data.status === "success") {
         alert(data.message);
