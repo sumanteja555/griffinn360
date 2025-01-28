@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "./AdventureParkUpdate.module.css";
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
+const imageUrl = import.meta.env.VITE_IMAGE_URL;
 
 const AdventureParkUpdate = () => {
   const [activities, setActivities] = useState([]);
@@ -51,12 +52,14 @@ const AdventureParkUpdate = () => {
       discount: activity?.discount || "",
     });
 
-    // Normalize the image path
     const normalizedPath = activity.img.replace(
       /^[\\\/]?src[\\\/]assets[\\\/]adventureActivities[\\\/]/,
-      "/uploads/adventureActivities/"
+      "uploads/adventureActivities/"
     );
 
+    console.log("normalizedPath is:", normalizedPath);
+    const fullImagePath = `${imageUrl}${normalizedPath}`;
+    console.log("full image path is:", fullImagePath);
     // Set the image preview
     setImagePreview(normalizedPath);
   };
@@ -79,6 +82,8 @@ const AdventureParkUpdate = () => {
 
       setImageFile(file);
       const previewURL = URL.createObjectURL(file);
+      console.log("Preview URL:", previewURL);
+
       setImagePreview(previewURL); // Set image preview
     }
   };
