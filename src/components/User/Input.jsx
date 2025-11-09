@@ -1,8 +1,9 @@
 import styles from "./User.module.css";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { memo } from 'react';
 
-const Input = ({ labelText, type, placeholder, id, value, onChange }) => {
+const Input = memo(({ labelText, type, placeholder, id, value, onChange }) => {
   return (
     <div className={styles.inputContainer}>
       <label>{labelText} :</label>
@@ -18,12 +19,12 @@ const Input = ({ labelText, type, placeholder, id, value, onChange }) => {
   );
 };
 
-export function PasswordInput({
+export const PasswordInput = memo(({
   handlePasswordInvisible,
   handlePasswordVisible,
   handleChange,
   passwordVisible,
-}) {
+}) => {
   return (
     <div className={styles.passwordWrapper}>
       <label>Enter your password :</label>
@@ -50,4 +51,6 @@ export function PasswordInput({
   );
 }
 
-export default Input;
+});  // Close PasswordInput memo
+
+export default Input;  // Input is already memoized above

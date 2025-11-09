@@ -2,12 +2,12 @@ import axios from "axios";
 import styles from "./User.module.css";
 import Input, { PasswordInput } from "./Input";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import { useDispatch, useSelector } from "react-redux"; // Import useDispatch and useSelector
 import { useLocation, useNavigate } from "react-router-dom";
 import { userActions, snackbarActions } from "../../store/store";
 
-const loginDetails = [
+const loginDetails = /* #__PURE__ */ [
   {
     id: "email",
     labelText: "Enter your registered mobile number",
@@ -42,46 +42,49 @@ const Login = ({
     }
   }, [isLoggedIn, navigate, from]);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = useCallback((e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault(); // Prevent default form submission
 
-    try {
-      const response = await axios.post(`${backendURL}/login.php`, formData);
+      try {
+        const response = await axios.post(`${backendURL}/login.php`, formData);
 
-      if (response.data.success) {
-        const token = response.data.token;
+        if (response.data.success) {
+          const token = response.data.token;
 
-        // Dispatch the setUser action to store token and user info in Redux
-        dispatch(
-          userActions.setUser({
-            token: token,
-            name: response.data.username, // Assuming the name or email comes from formData or decoded token
-          })
-        );
+          // Dispatch the setUser action to store token and user info in Redux
+          dispatch(
+            userActions.setUser({
+              token: token,
+              name: response.data.username, // Assuming the name or email comes from formData or decoded token
+            })
+          );
 
+          dispatch(
+            snackbarActions.openBar({
+              type: "success",
+              message: "logged in Successfully",
+            })
+          );
+          navigate(from, { replace: true });
+        }
+      } catch (error) {
         dispatch(
           snackbarActions.openBar({
-            type: "success",
-            message: "logged in Successfully",
+            type: "error",
+            message: error.response.data.message,
           })
         );
-        navigate(from, { replace: true });
       }
-    } catch (error) {
-      dispatch(
-        snackbarActions.openBar({
-          type: "error",
-          message: error.response.data.message,
-        })
-      );
-    }
 
-    // Sending login data to PHP backend
-  };
+      // Sending login data to PHP backend
+    },
+    [dispatch, formData, backendURL, from, navigate]
+  );
   return (
     <div className={styles.formContainer}>
       <h1>Login</h1>
@@ -115,4 +118,4 @@ const Login = ({
   );
 };
 
-export default Login;
+export default memo(Login);

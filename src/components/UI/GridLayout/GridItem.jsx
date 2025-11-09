@@ -1,33 +1,37 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./GridLayout.module.css";
 import { useDispatch } from "react-redux";
-
+import { memo, useCallback } from "react";
 import { cartActions } from "../../../store/store";
+import OptimizedImage from "../OptimizedImage/OptimizedImage";
 
-export default function GridItem({ item, heading }) {
+function GridItem({ item, heading }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { title, img, price, book, points, discount } = item;
 
-  function handleClick(name, price, discount) {
-    const newPrice =
-      discount !== "0" ? Math.floor(price - (price * discount) / 100) : price;
-    dispatch(cartActions.addToCart({ eventName: name, price: newPrice }));
-    navigate("/booknow");
-  }
+  const handleClick = useCallback(
+    (name, price, discount) => {
+      const newPrice =
+        discount !== "0" ? Math.floor(price - (price * discount) / 100) : price;
+      dispatch(cartActions.addToCart({ eventName: name, price: newPrice }));
+      navigate("/booknow");
+    },
+    [dispatch, navigate]
+  );
 
   return (
     <div className={styles.itemContainer}>
       <figure className={styles.imgContainer}>
-        <img
+        <OptimizedImage
           src={
-            heading == "adventure Park"
-              ? `http://www.griffinn360adventures.com/uploads/${img}`
+            heading === "Adventure Park"
+              ? `https://www.griffinn360adventures.com/uploads/${img}`
               : img
           }
           alt={title}
           className={styles.img}
-          loading="lazy"
+          loadingStyle="blur"
         />
       </figure>
       <div className={styles.infoContainer}>
@@ -67,3 +71,6 @@ export default function GridItem({ item, heading }) {
     </div>
   );
 }
+
+// Memoize the component to prevent unnecessary re-renders when props haven't changed
+export default memo(GridItem);

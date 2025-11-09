@@ -1,7 +1,8 @@
 import styles from "./GridLayout.module.css";
-
+import { memo } from "react";
 import GridItem from "./GridItem.jsx";
-export default function GridLayout({ gridItems }) {
+
+function GridLayout({ gridItems }) {
   const { heading, gridData } = gridItems;
   return (
     <section className={styles.container}>
@@ -24,3 +25,6 @@ export default function GridLayout({ gridItems }) {
     </section>
   );
 }
+
+// Memoize the component to prevent unnecessary re-renders when props haven't changed
+export default memo(GridLayout);

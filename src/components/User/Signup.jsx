@@ -2,12 +2,12 @@ import axios from "axios";
 import styles from "./User.module.css";
 import Input, { PasswordInput } from "./Input";
 
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 
 import { useDispatch } from "react-redux";
 import { snackbarActions } from "../../store/store";
 
-const signupDetails = [
+const signupDetails = /* #__PURE__ */ [
   {
     id: "name",
     labelText: "Name",
@@ -47,36 +47,39 @@ const Signup = ({
   // backend url
   const backendURL = import.meta.env.VITE_BACKEND_URL;
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = useCallback((e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default form submission
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault(); // Prevent the default form submission
 
-    // Sending form data to PHP backend
-    try {
-      const response = await axios.post(`${backendURL}/signup.php`, formData);
+      // Sending form data to PHP backend
+      try {
+        const response = await axios.post(`${backendURL}/signup.php`, formData);
 
-      // const data = await response.json();
+        // const data = await response.json();
 
-      dispatch(
-        snackbarActions.openBar({
-          type: "success",
-          message: "Signup Successfull",
-        })
-      );
-      handleToggle();
-    } catch (error) {
-      // console.error("There was an error submitting the form:", error);
-      dispatch(
-        snackbarActions.openBar({
-          type: "warning",
-          message: error.response.data.message,
-        })
-      );
-    }
-  };
+        dispatch(
+          snackbarActions.openBar({
+            type: "success",
+            message: "Signup Successfull",
+          })
+        );
+        handleToggle();
+      } catch (error) {
+        // console.error("There was an error submitting the form:", error);
+        dispatch(
+          snackbarActions.openBar({
+            type: "warning",
+            message: error.response.data.message,
+          })
+        );
+      }
+    },
+    [dispatch, formData, backendURL, handleToggle]
+  );
   return (
     <div className={styles.formContainer}>
       <h1>Signup</h1>
@@ -109,4 +112,4 @@ const Signup = ({
   );
 };
 
-export default Signup;
+export default memo(Signup);
