@@ -22,29 +22,21 @@ const AdminBookings = () => {
     if (!hasMore || loading) return;
 
     if (!isAdminLoggedIn) {
-      setError("Admin must be logged in");
+      setError("Please log in as admin to view bookings");
       return;
     }
 
     if (!token) {
-      setError("No authorization token available");
+      setError("Authentication token missing - please log in again");
       return;
     }
 
-    // Debug logs
-    console.log("Making request to:", `${backendURL}/adminBookings.php`);
-    console.log("Admin logged in:", isAdminLoggedIn);
-    console.log("Token available:", !!token);
-    console.log("Token value:", token);
-
     setLoading(true);
+    setError(null);
 
     try {
-      console.log("Making request to:", `${backendURL}/adminBookings.php`);
-      console.log("Request headers:", { Authorization: `Bearer ${token}` });
-
       const response = await axios.get(`${backendURL}/adminBookings.php`, {
-        params: { page, limit: 10 }, // Adjust limit as needed
+        params: { page, limit: 10 },
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -53,10 +45,9 @@ const AdminBookings = () => {
       });
 
       if (response.data.status === "success") {
-        const newBookings = response.data.data;
+        const newBookings = response.data.data || [];
 
         if (newBookings.length > 0) {
-          // Ensure we're not adding the same data twice
           setBookings((prevBookings) => {
             // Filter out any duplicate bookings based on ID
             const newUniqueBookings = newBookings.filter(
@@ -68,13 +59,23 @@ const AdminBookings = () => {
             return [...prevBookings, ...newUniqueBookings];
           });
         } else {
-          setHasMore(false); // No more data to fetch
+          setHasMore(false);
         }
       } else {
-        setHasMore(false); // Handle any error from the backend
+        setError(response.data.message || "Failed to fetch bookings");
+        setHasMore(false);
       }
     } catch (err) {
-      setError("Failed to fetch bookings");
+      console.error("Booking fetch error:", err);
+      if (err.response?.status === 401) {
+        setError("Session expired - please log in again");
+      } else {
+        setError(
+          err.response?.data?.message ||
+            "Failed to fetch bookings. Please try again."
+        );
+      }
+      setHasMore(false);
     }
 
     setLoading(false);
@@ -103,50 +104,74 @@ const AdminBookings = () => {
 
   if (error) return <p>{error}</p>;
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
+  if (error) {
+    return (
+      <section className={styles.container}>
+        <h1 className={styles.heading}>Bookings</h1>
+        <div className={styles.error}>
+          <p>{error}</p>
+          <button
+            onClick={() => {
+              setError(null);
+              setPage(1);
+            }}
+            className={styles.retryBtn}
+          >
+            Retry
+          </button>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.container}>
       <h1 className={styles.heading}>Bookings</h1>
       <div className={styles.bookingsContainer}>
-        {bookings.map(
-          ({
-            id,
-            name,
-            mobile_number,
-            amount,
-            event_name,
-            persons,
-            travel_date,
-          }) => {
-            function formatDate(dateString) {
-              // Parse the date string
-              const date = new Date(dateString);
-
-              // Extract day, month, and year
-              const day = String(date.getDate()).padStart(2, "0"); // Ensure 2 digits
-              const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based, so add 1
-              const year = date.getFullYear();
-
-              // Return in dd-mm-yyyy format
-              return `${day} - ${month} - ${year}`;
-            }
-
-            const formattedDate = formatDate(travel_date);
-            return (
+        {bookings.length === 0 && !loading ? (
+          <p className={styles.noBookings}>No bookings found</p>
+        ) : (
+          bookings.map(
+            ({
+              id,
+              name,
+              mobile_number,
+              amount,
+              event_name,
+              persons,
+              travel_date,
+            }) => (
               <div key={id} className={styles.booking}>
                 <p className={styles.name}>{name}</p>
                 <p className={styles.number}>{mobile_number}</p>
                 <p className={styles.eventName}>{event_name}</p>
-                <p className={styles.amount}>{amount}</p>
-                <p className={styles.persons}>{persons}</p>
-                <p className={styles.date}>{formattedDate}</p>
+                <p className={styles.amount}>₹{amount}</p>
+                <p className={styles.persons}>
+                  {persons} {persons === 1 ? "person" : "people"}
+                </p>
+                <p className={styles.date}>{formatDate(travel_date)}</p>
                 <button className={styles.btn}>Cancel</button>
               </div>
-            );
-          }
+            )
+          )
+        )}
+        {loading && (
+          <div className={styles.loadingContainer}>
+            <p className={styles.loading}>Loading bookings...</p>
+          </div>
+        )}
+        {!hasMore && bookings.length > 0 && (
+          <p className={styles.noMore}>No more bookings to load</p>
         )}
       </div>
-      {loading && <p>Loading...</p>}
-      {!hasMore && <p>No more bookings to load.</p>}
     </section>
   );
 };

@@ -196,3 +196,5 @@
 
 [09-Nov-2025 13:34:16 UTC] AUTH_HEADER from _SERVER: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
 [09-Nov-2025 13:34:16 UTC] AUTH_HEADER from REDIRECT: not set
+[09-Nov-2025 14:08:34 UTC] Fetched 8 bookings for page 1
+[09-Nov-2025 14:08:34 UTC] Fetched 8 bookings for page 1

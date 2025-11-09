@@ -9,7 +9,7 @@ const AdminPrivateRoute = ({ children }) => {
   // If the user is not logged in, redirect to the login page
   if (!isAdminLoggedIn) {
     return (
-      <Navigate to="/admin/adminUser" state={{ from: location }} replace true />
+      <Navigate to="/admin/adminuser" state={{ from: location }} replace />
     );
   }
 
