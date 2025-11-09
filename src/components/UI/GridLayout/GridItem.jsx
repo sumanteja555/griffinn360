@@ -5,6 +5,8 @@ import { memo, useCallback } from "react";
 import { cartActions } from "../../../store/store";
 import OptimizedImage from "../OptimizedImage/OptimizedImage";
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 function GridItem({ item, heading }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,15 +22,18 @@ function GridItem({ item, heading }) {
     [dispatch, navigate]
   );
 
+  // Compute image src safely; if `img` is falsy, pass `null` so child won't get an empty src
+  const computedSrc = img
+    ? heading === "Adventure Park"
+      ? `${backendURL.replace(/\/+$|\s+/g, "")}/uploads/${img}`
+      : img
+    : null;
+
   return (
     <div className={styles.itemContainer}>
       <figure className={styles.imgContainer}>
         <OptimizedImage
-          src={
-            heading === "Adventure Park"
-              ? `https://www.griffinn360adventures.com/uploads/${img}`
-              : img
-          }
+          src={computedSrc}
           alt={title}
           className={styles.img}
           loadingStyle="blur"
@@ -38,7 +43,7 @@ function GridItem({ item, heading }) {
         <h2 className={styles.title}>{title}</h2>
         {/* <p className={styles.description}>{description}</p> */}
         {points && (
-          <p className={styles.points}>
+          <div className={styles.points}>
             <ul>
               {points.map((point, index) => (
                 <li className={styles.point} key={index}>
@@ -46,7 +51,7 @@ function GridItem({ item, heading }) {
                 </li>
               ))}
             </ul>
-          </p>
+          </div>
         )}
         {discount !== "0" && (
           <p className={styles.discount}>Discount: {discount}%</p>

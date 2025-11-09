@@ -11,12 +11,19 @@ function OptimizedImage({
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [imageSrc, setImageSrc] = useState("");
+  const [imageSrc, setImageSrc] = useState(null);
 
   useEffect(() => {
     // Reset states when src changes
     setIsLoading(true);
     setError(false);
+
+    // If no src provided, avoid creating an Image with empty src.
+    if (!src) {
+      setImageSrc(null);
+      setIsLoading(false);
+      return;
+    }
 
     const img = new Image();
     img.src = src;
@@ -60,7 +67,7 @@ function OptimizedImage({
       )}
 
       <img
-        src={imageSrc}
+        src={imageSrc || undefined}
         alt={alt}
         className={`
           ${styles.image}
