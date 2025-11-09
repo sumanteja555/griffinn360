@@ -3,35 +3,40 @@
  * backend/config.php
  *
  * Returns a flat associative array with database connection settings.
- * Selected by the `APP_ENV` environment variable ('development' or 'production').
- *
- * Recommended usage:
- * - For local development: set `APP_ENV=development` (or leave unset)
- * - For production: set `APP_ENV=production` and provide PROD_* env vars
+ * Manually toggle between 'development' and 'production' using $env below.
  *
  * The calling code expects keys: 'servername', 'username', 'dbpassword', 'dbname'
  */
 
-$env = getenv('APP_ENV') ?: 'development';
+// 🔧 MANUAL TOGGLE: Change this to 'production' when deploying live
+$env = 'production';  // or 'production'
 
 $configSets = [
     'development' => [
-        'servername' => getenv('DEV_DB_HOST') ?: '127.0.0.1',
-        'username'   => getenv('DEV_DB_USER') ?: 'root',
-        'dbpassword' => getenv('DEV_DB_PASS') ?: '',
-        'dbname'     => getenv('DEV_DB_NAME') ?: 'griffinn360',
+        'servername' => '127.0.0.1',
+        'username'   => 'root',
+        'dbpassword' => '',
+        'dbname'     => 'griffinn360',
     ],
     'production' => [
-        'servername' => getenv('PROD_DB_HOST') ?: '127.0.0.1',
-        'username'   => getenv('PROD_DB_USER') ?: 'prod_user',
-        'dbpassword' => getenv('PROD_DB_PASS') ?: 'change_me',
-        'dbname'     => getenv('PROD_DB_NAME') ?: 'griffinn360',
+        'servername' => 'localhost', // 
+        'username'   => 'u770927083_griffinn360',
+        'dbpassword' => 'Griff@8991',
+        'dbname'     => 'u770927083_griffinn360',
     ],
 ];
 
+// Fallback safety check
 if (!array_key_exists($env, $configSets)) {
-    // Fallback to development if APP_ENV is unexpected
-    $env = 'development';
+    $env = 'production';
 }
 
-return $configSets[$env];
+$config = $configSets[$env];
+
+// Validate the hostname (avoid using URLs like https://example.com)
+if (isset($config['servername']) && preg_match('#^https?://#i', $config['servername'])) {
+    throw new Exception("Invalid database host '{$config['servername']}'. 
+    The DB host must be a hostname or IP (e.g. 'localhost' or '127.0.0.1'), not a URL.");
+}
+
+return $config;

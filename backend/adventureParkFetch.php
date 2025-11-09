@@ -1,8 +1,8 @@
 <?php
 
 header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
-// header("Access-Control-Allow-Origin: https://griffinn360adventures.com");
+// header("Access-Control-Allow-Origin: *");  // Comment out wildcard for security
+header("Access-Control-Allow-Origin: https://www.griffinn360adventure.com");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
