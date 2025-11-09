@@ -225,6 +225,6 @@
             "install-path": "../rmccue/requests"
         }
     ],
-    "dev": false,
+    "dev": true,
     "dev-package-names": []
 }

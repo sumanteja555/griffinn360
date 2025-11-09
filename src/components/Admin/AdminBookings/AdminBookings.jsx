@@ -19,14 +19,37 @@ const AdminBookings = () => {
 
   // Fetch bookings when the page number changes
   const fetchBookings = async () => {
-    if (!hasMore || !isAdminLoggedIn || loading) return;
+    if (!hasMore || loading) return;
+
+    if (!isAdminLoggedIn) {
+      setError("Admin must be logged in");
+      return;
+    }
+
+    if (!token) {
+      setError("No authorization token available");
+      return;
+    }
+
+    // Debug logs
+    console.log("Making request to:", `${backendURL}/adminBookings.php`);
+    console.log("Admin logged in:", isAdminLoggedIn);
+    console.log("Token available:", !!token);
+    console.log("Token value:", token);
 
     setLoading(true);
 
     try {
+      console.log("Making request to:", `${backendURL}/adminBookings.php`);
+      console.log("Request headers:", { Authorization: `Bearer ${token}` });
+
       const response = await axios.get(`${backendURL}/adminBookings.php`, {
         params: { page, limit: 10 }, // Adjust limit as needed
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       });
 
       if (response.data.status === "success") {

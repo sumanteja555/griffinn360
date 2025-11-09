@@ -1,97 +1,120 @@
 <?php
+$allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://griffinn360adventure.com',
+    'https://www.griffinn360adventure.com'
+];
+
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+
+if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Credentials: true");
+}
+
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+header("Access-Control-Max-Age: 86400");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit(0);
+}
+
+
+// ==========================
+// ✅ Error Reporting
+// ==========================
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/error_log.txt');
 
 header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Origin: https://griffinn360adventure.com");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
+// ==========================
+// ✅ Main PHP Logic
+// ==========================
+$autoload = __DIR__ . '/../vendor/autoload.php';
+if (!file_exists($autoload)) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Server misconfiguration: dependencies missing.']);
+    error_log('Missing vendor/autoload.php in adminLogin.php');
+    exit;
+}
+
+require_once $autoload;
 date_default_timezone_set('UTC');
+$config = require __DIR__ . '/config.php';
 
-// Include the JWT library (Install via Composer or download manually)
-require_once '../vendor/autoload.php'; // Adjust the path if necessary
-use \Firebase\JWT\JWT;
-use \Firebase\JWT\Key;
+use Firebase\JWT\JWT;
 
-$config = require __DIR__ . '/config.php'; // Load the config.php file
-
+$secret_key = $config['jwt_secret_key'];
 $servername = $config['servername'];
 $username = $config['username'];
 $dbpassword = $config['dbpassword'];
 $dbname = $config['dbname'];
-$secret_key = $config['jwt_secret_key']; // Use the secret key for token verification
 
-$conn = new mysqli($servername, $username, $dbpassword, $dbname);
+// ==========================
+// ✅ Handle POST request
+// ==========================
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $adminId = $data['adminId'] ?? '';
+    $adminPassword = $data['adminPassword'] ?? '';
 
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(["status" => "error", "message" => "Connection failed: " . $conn->connect_error]));
-}
-
-function verify_token($jwt, $secret_key) {
-    try {
-        // Decode the JWT token
-        $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
-        return $decoded;
-    } catch (Exception $e) {
-        return null; // Invalid token or expired token
-    }
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-
-
-    // Get the token from the Authorization header
-    $auth_header = isset($_SERVER['HTTP_AUTHORIZATION']) ? $_SERVER['HTTP_AUTHORIZATION'] : '';
-    if (strpos($auth_header, 'Bearer ') === 0) {
-        $token = substr($auth_header, 7); // Remove "Bearer " prefix
-    } else {
-        echo json_encode(["status" => "error", "message" => "Authorization token is missing."]);
-        exit();
+    if (empty($adminId) || empty($adminPassword)) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Please fill all fields.']);
+        exit;
     }
 
-    // Verify the token
-    $decoded_token = verify_token($token, $secret_key);
-    if (!$decoded_token) {
-        echo json_encode(["status" => "error", "message" => "Invalid or expired token."]);
-        exit();
+    $conn = new mysqli($servername, $username, $dbpassword, $dbname);
+    if ($conn->connect_error) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Database connection failed.']);
+        exit;
     }
 
-    // Get `page` and `limit` parameters from the request, with default values
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
-    $offset = ($page - 1) * $limit;
+    $stmt = $conn->prepare("SELECT adminId, adminPassword FROM admin WHERE adminId = ?");
+    $stmt->bind_param("s", $adminId);
+    $stmt->execute();
+    $stmt->store_result();
 
-    // Prepare the SQL query to fetch bookings with pagination
-    $sql = "SELECT * FROM bookings ORDER BY created_at DESC LIMIT ? OFFSET ?";
-    
-    if ($stmt = $conn->prepare($sql)) {
-        // Ensure $limit and $offset are integers
-        $limit = (int)$limit;
-        $offset = (int)$offset;
-        $stmt->bind_param("ii", $limit, $offset);
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($adminId, $hashedPassword);
+        $stmt->fetch();
 
-        $stmt->execute();
-        $result = $stmt->get_result();
+        if (password_verify($adminPassword, $hashedPassword)) {
+            $issuedAt = time();
+            $expirationTime = $issuedAt + 3600;
 
-        $bookings = [];
-        while ($row = $result->fetch_assoc()) {
-            $bookings[] = $row;
-        }
+            $payload = [
+                "iss" => "https://griffinn360adventures.com/",
+                "aud" => "https://griffinn360adventures.com/",
+                "iat" => $issuedAt,
+                "exp" => $expirationTime,
+                "data" => ["adminId" => $adminId]
+            ];
 
-        if (empty($bookings)) {
-            echo json_encode(["status" => "success", "data" => [], "message" => "No bookings found for the requested page."]);
+            $jwt = JWT::encode($payload, $secret_key, 'HS256');
+            http_response_code(200);
+            echo json_encode([
+                'success' => true,
+                'message' => 'Logged in successfully',
+                'token' => $jwt,
+                'adminId' => $adminId
+            ]);
+            exit;
         } else {
-            echo json_encode(["status" => "success", "data" => $bookings]);
+            http_response_code(401);
+            echo json_encode(['success' => false, 'message' => 'Invalid password.']);
+            exit;
         }
-
-        $stmt->close();
     } else {
-        echo json_encode(["status" => "error", "message" => "Error preparing query for fetching bookings."]);
+        http_response_code(404);
+        echo json_encode(['success' => false, 'message' => 'No user found.']);
+        exit;
     }
 }
-
-// Close the connection
-$conn->close();
-
-?>

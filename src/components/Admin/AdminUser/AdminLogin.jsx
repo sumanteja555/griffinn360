@@ -51,7 +51,11 @@ const AdminLogin = ({
     try {
       const response = await axios.post(
         `${backendURL}/adminLogin.php`,
-        formData
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true, // optional, for cookies or auth headers
+        }
       );
 
       if (response.data.success) {
@@ -75,15 +79,13 @@ const AdminLogin = ({
         navigate(from, { replace: true });
       }
     } catch (error) {
-      // console.error(
-      //   "There was an error logging in:",
-      //   error.response.data.message
-      // );
+      const errorMessage =
+        error.response?.data?.message || "Network error. Please try again.";
 
       dispatch(
         snackbarActions.openBar({
           type: "error",
-          message: error.response.data.message,
+          message: errorMessage,
         })
       );
     }

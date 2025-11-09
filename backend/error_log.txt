@@ -1,1 +1,198 @@
-[09-Nov-2025 12:31:05 Europe/Berlin] payment.php error: Razorpay credentials are not configured.
+[09-Nov-2025 13:33:53 UTC] Received headers: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+    [Accept] => application/json, text/plain, */*
+    [sec-ch-ua] => "Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"
+    [sec-ch-ua-mobile] => ?0
+    [Origin] => http://localhost:5173
+    [Sec-Fetch-Site] => same-site
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost:5173/
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en-US;q=0.9,en;q=0.8,te;q=0.7
+    [Cookie] => rzp_unified_session_id=Rderk6oYzWUlpg
+)
+
+[09-Nov-2025 13:33:53 UTC] AUTH_HEADER from _SERVER: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+[09-Nov-2025 13:33:53 UTC] AUTH_HEADER from REDIRECT: not set
+[09-Nov-2025 13:33:53 UTC] Received headers: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+    [Accept] => application/json, text/plain, */*
+    [sec-ch-ua] => "Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"
+    [sec-ch-ua-mobile] => ?0
+    [Origin] => http://localhost:5173
+    [Sec-Fetch-Site] => same-site
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost:5173/
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en-US;q=0.9,en;q=0.8,te;q=0.7
+    [Cookie] => rzp_unified_session_id=Rderk6oYzWUlpg
+)
+
+[09-Nov-2025 13:33:53 UTC] AUTH_HEADER from _SERVER: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+[09-Nov-2025 13:33:53 UTC] AUTH_HEADER from REDIRECT: not set
+[09-Nov-2025 13:33:53 UTC] Received headers: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+    [Accept] => application/json, text/plain, */*
+    [sec-ch-ua] => "Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"
+    [sec-ch-ua-mobile] => ?0
+    [Origin] => http://localhost:5173
+    [Sec-Fetch-Site] => same-site
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost:5173/
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en-US;q=0.9,en;q=0.8,te;q=0.7
+    [Cookie] => rzp_unified_session_id=Rderk6oYzWUlpg
+)
+
+[09-Nov-2025 13:33:53 UTC] AUTH_HEADER from _SERVER: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+[09-Nov-2025 13:33:53 UTC] AUTH_HEADER from REDIRECT: not set
+[09-Nov-2025 13:33:56 UTC] Received headers: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+    [Accept] => application/json, text/plain, */*
+    [sec-ch-ua] => "Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"
+    [sec-ch-ua-mobile] => ?0
+    [Origin] => http://localhost:5173
+    [Sec-Fetch-Site] => same-site
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost:5173/
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en-US;q=0.9,en;q=0.8,te;q=0.7
+    [Cookie] => rzp_unified_session_id=Rderk6oYzWUlpg
+)
+
+[09-Nov-2025 13:33:56 UTC] AUTH_HEADER from _SERVER: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+[09-Nov-2025 13:33:56 UTC] AUTH_HEADER from REDIRECT: not set
+[09-Nov-2025 13:33:56 UTC] Received headers: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+    [Accept] => application/json, text/plain, */*
+    [sec-ch-ua] => "Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"
+    [sec-ch-ua-mobile] => ?0
+    [Origin] => http://localhost:5173
+    [Sec-Fetch-Site] => same-site
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost:5173/
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en-US;q=0.9,en;q=0.8,te;q=0.7
+    [Cookie] => rzp_unified_session_id=Rderk6oYzWUlpg
+)
+
+[09-Nov-2025 13:33:56 UTC] AUTH_HEADER from _SERVER: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+[09-Nov-2025 13:33:56 UTC] AUTH_HEADER from REDIRECT: not set
+[09-Nov-2025 13:33:56 UTC] Received headers: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+    [Accept] => application/json, text/plain, */*
+    [sec-ch-ua] => "Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"
+    [sec-ch-ua-mobile] => ?0
+    [Origin] => http://localhost:5173
+    [Sec-Fetch-Site] => same-site
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost:5173/
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en-US;q=0.9,en;q=0.8,te;q=0.7
+    [Cookie] => rzp_unified_session_id=Rderk6oYzWUlpg
+)
+
+[09-Nov-2025 13:33:56 UTC] AUTH_HEADER from _SERVER: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+[09-Nov-2025 13:33:56 UTC] AUTH_HEADER from REDIRECT: not set
+[09-Nov-2025 13:34:16 UTC] Received headers: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+    [Accept] => application/json, text/plain, */*
+    [sec-ch-ua] => "Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"
+    [sec-ch-ua-mobile] => ?0
+    [Origin] => http://localhost:5173
+    [Sec-Fetch-Site] => same-site
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost:5173/
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en-US;q=0.9,en;q=0.8,te;q=0.7
+    [Cookie] => rzp_unified_session_id=Rderk6oYzWUlpg
+)
+
+[09-Nov-2025 13:34:16 UTC] AUTH_HEADER from _SERVER: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+[09-Nov-2025 13:34:16 UTC] AUTH_HEADER from REDIRECT: not set
+[09-Nov-2025 13:34:16 UTC] Received headers: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+    [Accept] => application/json, text/plain, */*
+    [sec-ch-ua] => "Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"
+    [sec-ch-ua-mobile] => ?0
+    [Origin] => http://localhost:5173
+    [Sec-Fetch-Site] => same-site
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost:5173/
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en-US;q=0.9,en;q=0.8,te;q=0.7
+    [Cookie] => rzp_unified_session_id=Rderk6oYzWUlpg
+)
+
+[09-Nov-2025 13:34:16 UTC] AUTH_HEADER from _SERVER: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+[09-Nov-2025 13:34:16 UTC] AUTH_HEADER from REDIRECT: not set
+[09-Nov-2025 13:34:16 UTC] Received headers: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+    [Accept] => application/json, text/plain, */*
+    [sec-ch-ua] => "Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"
+    [sec-ch-ua-mobile] => ?0
+    [Origin] => http://localhost:5173
+    [Sec-Fetch-Site] => same-site
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost:5173/
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en-US;q=0.9,en;q=0.8,te;q=0.7
+    [Cookie] => rzp_unified_session_id=Rderk6oYzWUlpg
+)
+
+[09-Nov-2025 13:34:16 UTC] AUTH_HEADER from _SERVER: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyaWZmaW5uMzYwYWR2ZW50dXJlcy5jb20vIiwiYXVkIjoiaHR0cHM6Ly9ncmlmZmlubjM2MGFkdmVudHVyZXMuY29tLyIsImlhdCI6MTc2MjY5NDIyNywiZXhwIjoxNzYyNjk3ODI3LCJkYXRhIjp7ImFkbWluSWQiOiJzdW1hbnRlamE1NTUifX0.XqIwfmNPGCvSeUqfD56T5u40SUD89PZPzgLkw-EPBwk
+[09-Nov-2025 13:34:16 UTC] AUTH_HEADER from REDIRECT: not set

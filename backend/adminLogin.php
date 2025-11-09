@@ -1,12 +1,52 @@
 <?php
+// Enable error logging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/error_log.txt');
+
 header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
-// header("Access-Control-Allow-Origin: https://griffinn360adventures.com");
+
+// Allowed origins
+$allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://griffinn360adventure.com',
+    'https://www.griffinn360adventure.com'
+];
+
+// Get the origin that sent the request
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+// Set the CORS headers
+if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+}
+
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header('Access-Control-Max-Age: 3600');
+
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit(0);
+}
+
+// Guard: ensure composer autoload exists
+$autoload = __DIR__ . '/../vendor/autoload.php';
+if (!file_exists($autoload)) {
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Server misconfiguration: dependencies missing. Run composer install.'
+    ]);
+    error_log('Missing vendor/autoload.php in adminLogin.php');
+    exit;
+}
 
 // Include JWT library
-require_once '../vendor/autoload.php';
+require_once $autoload;
 date_default_timezone_set('UTC');
 
 
