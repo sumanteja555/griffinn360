@@ -12,12 +12,12 @@ function PerformanceMonitor({ id, children }) {
   ) => {
     // Log only in development
     if (process.env.NODE_ENV === "development") {
-      console.log(`[Performance] ${id} - ${phase}`);
-      console.log(`Actual time: ${actualDuration.toFixed(2)}ms`);
-      console.log(`Base time: ${baseDuration.toFixed(2)}ms`);
-      console.log(
-        `Improvement: ${(baseDuration - actualDuration).toFixed(2)}ms`
-      );
+      // console.log(`[Performance] ${id} - ${phase}`);
+      // console.log(`Actual time: ${actualDuration.toFixed(2)}ms`);
+      // console.log(`Base time: ${baseDuration.toFixed(2)}ms`);
+      // console.log(
+      //   `Improvement: ${(baseDuration - actualDuration).toFixed(2)}ms`
+      // );
 
       // Alert if render time is too high
       if (actualDuration > 16) {

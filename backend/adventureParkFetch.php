@@ -1,10 +1,33 @@
 <?php
 
 header('Content-Type: application/json');
-// header("Access-Control-Allow-Origin: *");  // Comment out wildcard for security
-header("Access-Control-Allow-Origin: https://www.griffinn360adventure.com");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// Define allowed origins
+$allowedOrigins = array(
+    'http://localhost:5173',
+    'https://griffinn360adventure.com',
+    'https://www.griffinn360adventure.com'
+);
+
+// Get the origin that sent the request
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+// Set the CORS headers
+if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+}
+
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    exit(0);
+}
+
+// Handle errors
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 
 $config= require __DIR__ . '/config.php'; // Load the config.php file

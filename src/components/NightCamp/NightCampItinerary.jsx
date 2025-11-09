@@ -1,6 +1,6 @@
 import styles from "./NightCamp.module.css";
 
-import { memo, useMemo } from 'react';
+import { memo, useMemo } from "react";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
@@ -12,11 +12,14 @@ import TimelineOppositeContent, {
 } from "@mui/lab/TimelineOppositeContent";
 const NightCampItinerary = memo(({ data }) => {
   // Memoize timeline styles
-  const timelineStyles = useMemo(() => ({
-    [`& .${timelineOppositeContentClasses.root}`]: {
-      flex: 0.2,
-    },
-  }), []);
+  const timelineStyles = useMemo(
+    () => ({
+      [`& .${timelineOppositeContentClasses.root}`]: {
+        flex: 0.2,
+      },
+    }),
+    []
+  );
   return (
     <Timeline
       sx={timelineStyles}
@@ -48,8 +51,6 @@ const NightCampItinerary = memo(({ data }) => {
       })}
     </Timeline>
   );
-};
-
 });
 
 export default NightCampItinerary;

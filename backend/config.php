@@ -17,12 +17,20 @@ $configSets = [
         'username'   => 'root',
         'dbpassword' => '',
         'dbname'     => 'griffinn360',
+        'jwt_secret_key' => 'griffinn360',
+        // Razorpay test keys (replace with your test keys during development)
+        'razorpay_key_id' => 'rzp_test_RddMhb2ue5ne5o',
+        'razorpay_key_secret' => '1n0jlLOWE8VJ23uNQZDUC5Bb'
     ],
     'production' => [
-        'servername' => 'localhost', // 
+        'servername' => 'localhost',
         'username'   => 'u770927083_griffinn360',
         'dbpassword' => 'Griff@8991',
         'dbname'     => 'u770927083_griffinn360',
+        'jwt_secret_key' => 'griffinn360',
+        // Razorpay live keys - REPLACE with real production keys before going live
+        'razorpay_key_id' => 'rzp_live_xxxxxxx',
+        'razorpay_key_secret' => 'rzp_live_secret_xxxxx'
     ],
 ];
 

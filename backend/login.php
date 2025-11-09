@@ -1,12 +1,41 @@
 <?php
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Create error log
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/error_log.txt');
+
 header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
-// header("Access-Control-Allow-Origin: https://griffinn360adventures.com");
+
+// Define allowed origins
+$allowedOrigins = array(
+    'http://localhost:5173',
+    'https://griffinn360adventure.com',
+    'https://www.griffinn360adventure.com'
+);
+
+// Get the origin that sent the request
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+// Set the CORS headers
+if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+}
+
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Max-Age: 3600");
+
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit(0);
+}
 
 // Include JWT library
-require_once '../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 date_default_timezone_set('UTC');
 
 $config= require __DIR__ . '/config.php'; // Load the config.php file
