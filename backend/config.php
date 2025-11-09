@@ -9,7 +9,7 @@
  */
 
 // 🔧 MANUAL TOGGLE: Change this to 'production' when deploying live
-$env = 'development';  // or 'production'
+$env = 'production';  // or 'production'
 
 $configSets = [
     'development' => [
@@ -29,14 +29,14 @@ $configSets = [
         'dbname'     => 'u770927083_griffinn360',
         'jwt_secret_key' => 'griffinn360',
         // Razorpay live keys - REPLACE with real production keys before going live
-        'razorpay_key_id' => 'rzp_live_xxxxxxx',
-        'razorpay_key_secret' => 'rzp_live_secret_xxxxx'
+        'razorpay_key_id' => 'rzp_test_RddMhb2ue5ne5o',
+        'razorpay_key_secret' => '1n0jlLOWE8VJ23uNQZDUC5Bb'
     ],
 ];
 
 // Fallback safety check
 if (!array_key_exists($env, $configSets)) {
-    $env = 'development';
+    $env = 'production';
 }
 
 $config = $configSets[$env];

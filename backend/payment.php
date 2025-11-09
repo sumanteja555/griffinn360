@@ -73,10 +73,18 @@ $orderData = [
 ];
 
 try {
-    // Initialize Razorpay API with the loaded keys
+    // Validate and log Razorpay credentials
     if (empty($config['razorpay_key_id']) || empty($config['razorpay_key_secret'])) {
+        error_log('Payment.php error: Missing Razorpay credentials');
         throw new Exception('Razorpay credentials are not configured.');
     }
+    
+    if ($config['razorpay_key_id'] === 'rzp_live_xxxxxxx' || $config['razorpay_key_secret'] === 'rzp_live_secret_xxxxx') {
+        error_log('Payment.php error: Using placeholder Razorpay credentials');
+        throw new Exception('Invalid Razorpay credentials. Please configure real API keys.');
+    }
+
+    error_log('Initializing Razorpay with key_id: ' . substr($config['razorpay_key_id'], 0, 8) . '...');
 
     $api = new Api($config['razorpay_key_id'], $config['razorpay_key_secret']);
     $order = $api->order->create($orderData);
