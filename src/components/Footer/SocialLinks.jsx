@@ -8,25 +8,34 @@ export default function SocialLinks() {
       <p className={styles.title}>Social Links</p>
       <ul className={styles.socialLinksUl}>
         <li className={styles.socialLinks} id={styles.instagram}>
-          <a href="https://www.instagram.com/griffinn360adventure/">
+          <a
+            href="https://www.instagram.com/griffinn360adventures/"
+            target="blank"
+          >
             <FaInstagram className={styles.socialIcon} />
             Instagram
           </a>
         </li>
         <li className={styles.socialLinks} id={styles.youtube}>
-          <a href="https://www.youtube.com/@griffinn360adventures">
+          <a
+            href="https://www.youtube.com/@griffinn360adventures"
+            target="blank"
+          >
             <FaYoutube className={styles.socialIcon} />
             Youtube
           </a>
         </li>
         <li className={styles.socialLinks} id={styles.gmail}>
-          <a href="mailto:someone@example.com">
+          <a href="mailto:someone@example.com" target="blank">
             <SiGmail className={styles.socialIcon} />
             Gmail
           </a>
         </li>
         <li className={styles.socialLinks} id={styles.whatsapp}>
-          <a href="https://chat.whatsapp.com/GMqTwjiY2WB6vFB482TSYF">
+          <a
+            href="https://chat.whatsapp.com/GMqTwjiY2WB6vFB482TSYF"
+            target="blank"
+          >
             <FaWhatsapp className={styles.socialIcon} />
             Whats App
           </a>
