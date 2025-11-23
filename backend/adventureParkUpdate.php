@@ -1,5 +1,38 @@
 <?php
 
+
+
+// Set up allowed origins
+$allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://griffinn360adventure.com',
+    'https://www.griffinn360adventure.com'
+];
+
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+
+// Check if the origin is allowed
+if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Credentials: true");
+} else {
+    header("Access-Control-Allow-Origin: https://griffinn360adventure.com");
+    header("Access-Control-Allow-Credentials: true");
+}
+
+// Handle OPTIONS request for CORS preflight
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+    header("Access-Control-Max-Age: 86400");    // Cache preflight for 24 hours
+    header("Content-Type: application/json");
+    exit(0);
+}
+
+// Content-Type should be JSON for responses
+header("Content-Type: application/json");
+
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -23,20 +56,6 @@ if ($conn->connect_error) {
 
 // Define the path to the uploads directory
 $uploadsDir = realpath(__DIR__ . '/../uploads/adventureActivities/'); // Adjust this path if necessary
-
-// Handle OPTIONS request for CORS preflight
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type, Authorization");
-    exit(); // Stop further processing
-}
-
-// Content-Type should be JSON for responses
-header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Handle PUT request
 if ($_SERVER["REQUEST_METHOD"] === "PUT") {

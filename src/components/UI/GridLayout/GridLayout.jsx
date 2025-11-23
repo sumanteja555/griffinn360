@@ -8,7 +8,8 @@ function GridLayout({ gridItems }) {
     <section className={styles.container}>
       <p id={styles.heading}>{heading}</p>
 
-      {heading == "adventure Park" ? (
+      {typeof heading === "string" &&
+      heading.toLowerCase() === "adventure park" ? (
         <p className={styles.parkInfo}>
           Griffinn Adventure Park sounds like an exciting destination! Located
           in Arogya Sanjeevani Vanam, near LB Nagar and in the Injapur area of

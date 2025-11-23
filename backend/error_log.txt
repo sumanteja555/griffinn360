@@ -198,3 +198,5 @@
 [09-Nov-2025 13:34:16 UTC] AUTH_HEADER from REDIRECT: not set
 [09-Nov-2025 14:08:34 UTC] Fetched 8 bookings for page 1
 [09-Nov-2025 14:08:34 UTC] Fetched 8 bookings for page 1
+[23-Nov-2025 12:57:26 UTC] Fetched 8 bookings for page 1
+[23-Nov-2025 12:57:26 UTC] Fetched 8 bookings for page 1

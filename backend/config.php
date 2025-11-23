@@ -29,8 +29,8 @@ $configSets = [
         'dbname'     => 'u770927083_griffinn360',
         'jwt_secret_key' => 'griffinn360',
         // Razorpay live keys - REPLACE with real production keys before going live
-        'razorpay_key_id' => 'rzp_test_RddMhb2ue5ne5o',
-        'razorpay_key_secret' => '1n0jlLOWE8VJ23uNQZDUC5Bb'
+        'razorpay_key_id' => 'rzp_live_RdfMrRfmPQ8xXO',
+        'razorpay_key_secret' => 'VfhN2kHhHhCHYzHfJ7U34zud'
     ],
 ];
 

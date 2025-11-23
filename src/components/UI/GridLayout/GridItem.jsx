@@ -22,12 +22,27 @@ function GridItem({ item, heading }) {
     [dispatch, navigate]
   );
 
-  // Compute image src safely; if `img` is falsy, pass `null` so child won't get an empty src
-  const computedSrc = img
-    ? heading === "Adventure Park"
-      ? `${backendURL.replace(/\/+$|\s+/g, "")}/uploads/${img}`
-      : img
-    : null;
+  // Compute image src safely; handle various shapes of `img` coming from the backend:
+  // - full absolute URL (starts with http/https) -> use as-is
+  // - absolute path starting with '/' (e.g. '/uploads/...') -> combine with site root
+  // - relative path or bare filename -> prepend uploads location on site root
+  const computedSrc = (() => {
+    if (!img) return null;
+
+    // If the img is already an absolute URL, return it
+    if (/^https?:\/\//i.test(img)) return img;
+
+    // Determine site root by removing a trailing /backend segment from backendURL
+    const siteRoot = backendURL ? backendURL.replace(/\/backend\/?$/i, "") : "";
+
+    // If img starts with a slash it's already an absolute path on the site
+    if (img.startsWith("/")) {
+      return `${siteRoot}${img}`;
+    }
+
+    // Otherwise assume it's a path relative to uploads and join appropriately
+    return `${siteRoot}/uploads/${img}`;
+  })();
 
   return (
     <div className={styles.itemContainer}>
