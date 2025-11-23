@@ -9,7 +9,7 @@
  */
 
 // 🔧 MANUAL TOGGLE: Change this to 'production' when deploying live
-$env = 'development';  // or 'production'
+$env = 'production';  // or 'production'
 
 $configSets = [
     'development' => [
@@ -36,7 +36,7 @@ $configSets = [
 
 // Fallback safety check
 if (!array_key_exists($env, $configSets)) {
-    $env = 'development';
+    $env = 'production';
 }
 
 $config = $configSets[$env];
