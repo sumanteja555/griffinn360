@@ -19,6 +19,10 @@ if (in_array($origin, $allowedOrigins)) {
     header("Access-Control-Allow-Credentials: true");
 }
 
+// Always expose allowed methods and headers for CORS responses (not only OPTIONS)
+// This helps avoid preflight failures if the server responds without these headers.
+header("Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Accept");
 // Handle OPTIONS preflight request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
@@ -30,6 +34,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Set content type for all responses
 header("Content-Type: application/json");
+
+// Support method override so clients can send POST with X-HTTP-Method-Override: PUT
+// This is a fallback for environments where PUT requests are blocked before hitting PHP
+$requestMethod = $_SERVER['REQUEST_METHOD'];
+if ($requestMethod === 'POST') {
+    $override = $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] ?? null;
+    if (!$override && isset($_POST['_method'])) {
+        $override = $_POST['_method'];
+    }
+    if ($override) {
+        $requestMethod = strtoupper($override);
+    }
+}
 
 // Database configuration
 $config = require __DIR__ . '/config.php';
@@ -47,7 +64,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch all nightcamping data
-if ($_SERVER["REQUEST_METHOD"] === "GET") {
+if ($requestMethod === "GET") {
     $sql = "SELECT id, title, price, images, inclusions, exclusions, itinerary, discount FROM nightcamping";
     $result = $conn->query($sql);
 
@@ -69,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 }
 
 // Update nightcamping data
-if ($_SERVER["REQUEST_METHOD"] === "PUT") {
+if ($requestMethod === "PUT") {
     // Read input data
     $input = json_decode(file_get_contents('php://input'), true);
 
